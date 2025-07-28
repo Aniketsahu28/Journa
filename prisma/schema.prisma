@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id                Int             @default(autoincrement())   @id
+  name              String?
+  dateOfBirth       String?
+  email             String?         @unique
+  emailVerified     DateTime?
+  image             String?
+  password          String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  bucketItems       BucketItem[]
+  categories        Category[]
+  notifications     Notification[]
+  accounts          Account[]
+  sessions          Session[]
+}
+
+model Account {
+  id                 Int       @default(autoincrement())   @id
+  userId             Int
+  type               String
+  provider           String
+  providerAccountId  String
+  refresh_token      String?
+  access_token       String?
+  expires_at         Int?
+  token_type         String?
+  scope              String?
+  id_token           String?
+  session_state      String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id                Int              @default(autoincrement())   @id
+  sessionToken      String           @unique
+  userId            Int
+  expires           DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String               //Email address
+  token      String   @unique 
+  expires    DateTime             // Expiry time (default 5–10 mins)
+
+  @@unique([identifier, token])
+}
+
+model BucketItem{
+  id                 Int             @default(autoincrement())   @id
+  title              String
+  description        String?
+  tags               String[]
+  date               DateTime?
+  reminder           DateTime?
+  isComplete         Boolean         @default(false)
+  userId             Int
+  categoryId         Int?            
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+
+  notifications      Notification[]
+
+  user               User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category           Category?       @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model Category{
+  id            Int             @default(autoincrement())   @id
+  name          String
+  userId        Int
+  parentId      Int?            //nullable for root categories
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  parent        Category?       @relation("CategoryToSubcategories", fields: [parentId], references: [id], onDelete: Cascade)
+  children      Category[]      @relation("CategoryToSubcategories")
+
+  bucketItems   BucketItem[]
+
+  @@index([parentId])
+  @@index([userId])
+}
+
+model Notification{
+  id            Int             @default(autoincrement())   @id
+  subject       String
+  body          String
+  isRead        Boolean         @default(false)
+  userId        Int
+  bucketItemId  Int  
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bucketItem    BucketItem      @relation(fields: [bucketItemId], references: [id], onDelete: Cascade)
+}
