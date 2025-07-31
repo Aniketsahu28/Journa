@@ -41,6 +41,27 @@ export async function sendVerificationEmail(email: string, token: string) {
       html: `<a href="${verificationUrl}">Click here to verify your email for Journa</a>`,
     });
   } catch (error) {
-    throw new Error(`Failed to send verification email. Error: ${error}`);
+    throw new Error(`Failed to send verification email`);
+  }
+}
+
+export async function sendForgotPasswordOtp(email: string, otp: string) {
+  try {
+    const OTP_CODE = `${otp}`;
+
+    await sendEmail({
+      to: email,
+      subject: "One-Time Password (OTP) for Account Verification",
+      html: `<body>
+                <p>Hi there,</p>
+                <p>Your One-Time Password (OTP) is:</p>
+                <h2>${OTP_CODE}</h2>
+                <p>This OTP is valid for 10 minutes. Please do not share it with anyone.</p>
+                <p>If you didn't request this, you can ignore this email.</p>
+                <p>Thanks,<br/>Journa</p>
+            </body>`,
+    });
+  } catch (error) {
+    throw new Error(`Failed to send otp email`);
   }
 }

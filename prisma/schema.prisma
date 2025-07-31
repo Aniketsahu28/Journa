@@ -111,3 +111,29 @@ model Notification{
   user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   bucketItem    BucketItem      @relation(fields: [bucketItemId], references: [id], onDelete: Cascade)
 }
+
+model Otp {
+  email      String              @unique
+  otp        String
+  expires    DateTime             // Expiry time (default 5–10 mins)
+
+  @@unique([email, otp])
+}
+
+model Bug {
+  id            Int                 @default(autoincrement())   @id
+  title         String
+  description   String?
+  images        String[]
+  videos        String[]
+  createdAt     DateTime            @default(now())
+}
+
+model Feature {
+  id            Int                 @default(autoincrement())   @id 
+  title         String
+  description   String
+  images        String[]
+  videos        String[]
+  createdAt     DateTime            @default(now())
+}
