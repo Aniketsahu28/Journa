@@ -3,36 +3,56 @@ import { sendVerificationEmail } from "@/lib/nodemailer";
 import prisma from "@/lib/prisma";
 import { generateVerificationToken } from "@/lib/utils/generateVerificationToken";
 import { NextRequest, NextResponse } from "next/server";
+import { ZUserSignupSchema } from "@/zod/ZUserSignup";
+import z from "zod";
 
 export async function POST(req: NextRequest) {
-  const { name, email, password, dateOfBirth } = await req.json();
-
-  const userAlreadyExists = await prisma.user.findFirst({
-    where: {
-      email: email,
-    },
-  });
-
-  if (userAlreadyExists) {
-    return NextResponse.json(
-      { error: "User with this email already exists" },
-      { status: 400 }
-    );
-  }
-
-  const hashedPassword = await hashPassword(password);
-  const user = await prisma.user.create({
-    data: {
+  try {
+    const { name, email, password, dateOfBirth } = await req.json();
+    const result = ZUserSignupSchema.safeParse({
       name,
       email,
-      password: hashedPassword,
+      password,
       dateOfBirth,
-    },
-  });
+    });
 
-  const token = await generateVerificationToken(email);
+    if (result.success) {
+      const userAlreadyExists = await prisma.user.findFirst({
+        where: {
+          email: result.data.email,
+        },
+      });
 
-  sendVerificationEmail(email, token.token);
+      if (userAlreadyExists) {
+        return NextResponse.json(
+          { error: "User with this email already exists" },
+          { status: 400 }
+        );
+      }
 
-  return NextResponse.json({ user }, { status: 200 });
+      const hashedPassword = await hashPassword(result.data.password);
+      const user = await prisma.user.create({
+        data: {
+          name: result.data.name,
+          email: result.data.email,
+          password: hashedPassword,
+          dateOfBirth: result.data.dateOfBirth,
+        },
+      });
+
+      const token = await generateVerificationToken(result.data.email);
+      sendVerificationEmail(result.data.email, token.token);
+      return NextResponse.json({ user }, { status: 200 });
+    } else {
+      return NextResponse.json(
+        { error: z.flattenError(result.error).fieldErrors },
+        { status: 400 }
+      );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
 }
