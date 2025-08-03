@@ -1,4 +1,3 @@
-// route.ts
 import { comparePassword } from "@/lib/bcrypt";
 import prisma from "@/lib/prisma";
 import NextAuth, { AuthOptions } from "next-auth";
@@ -56,11 +55,11 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async jwt({ token, user }: { token: JWT; user: any }) {
-      if (user) token.id = user.id;
+      if (user) token.userId = user.id;
       return token;
     },
     async session({ session, token }: { session: any; token: JWT }) {
-      if (session.user && token.id) session.user.id = token.id;
+      if (session.user && token.userId) session.user.userId = token.userId;
       return session;
     },
   },
