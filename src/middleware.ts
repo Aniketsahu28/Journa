@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
 export const config = {
-  matcher: ["/api/bucketlist/add-item", "/api/bucketlist/:path*"],
+  matcher: ["/api/bucketlist/add-item", "/api/bucketlist/:path*", "/api/category/:path*", "/api/category"],
 };
 
 export async function middleware(req: NextRequest) {
