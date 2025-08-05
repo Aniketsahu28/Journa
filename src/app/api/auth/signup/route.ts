@@ -8,7 +8,7 @@ import z from "zod";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password, dateOfBirth } = await req.json();
+    const { name, email, password, dateOfBirth, country } = await req.json();
     const result = ZUserSignupSchema.safeParse({
       name,
       email,
@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
           email: result.data.email,
           password: hashedPassword,
           dateOfBirth: result.data.dateOfBirth,
+          country
         },
       });
 

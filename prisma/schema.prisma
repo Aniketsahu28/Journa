@@ -15,6 +15,7 @@ model User {
   emailVerified     DateTime?
   image             String?
   password          String?
+  country           String?
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 
@@ -23,6 +24,8 @@ model User {
   notifications     Notification[]
   accounts          Account[]
   sessions          Session[]
+  bugs              Bug[]
+  features          Feature[]
 }
 
 model Account {
@@ -126,14 +129,20 @@ model Bug {
   description   String?
   images        String[]
   videos        String[]
+  userId        Int
   createdAt     DateTime            @default(now())
+
+  user          User                @relation(fields: [userId], references: [id])
 }
 
 model Feature {
   id            Int                 @default(autoincrement())   @id 
   title         String
-  description   String
+  description   String?
   images        String[]
   videos        String[]
+  userId        Int
   createdAt     DateTime            @default(now())
+
+  user          User                @relation(fields: [userId], references: [id])
 }
