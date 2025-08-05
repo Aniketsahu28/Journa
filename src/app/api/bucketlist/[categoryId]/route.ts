@@ -3,12 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest, { params }: { params: { categoryId: string } }) {
     try {
-        const userId = req.headers.get('userId');
         const categoryId = params.categoryId;
 
         const bucketItems = await prisma.bucketItem.findMany({
             where: {
-                userId: parseInt(userId as string),
                 categoryId: parseInt(categoryId)
             }
         })
