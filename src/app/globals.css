@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme inline {
+    --font-serifDisplay: var(--font-dm-serif-display);
+    --font-poppins: var(--font-poppins);
+    --font-nunito: var(--font-nunito);
+
+    --color-white: #F5F4F4;
+    --color-red: #DB2828;
+    --color-green: #4CAF50;
+    --color-yellow_100: #FFC034;
+    --color-yellow_200: #FFCD5D;
+    --color-yellow_300: #FFD371;
+    --color-yellow_400: #FFE6AE;
+    --color-yellow_500: #FFF9EB;
+}

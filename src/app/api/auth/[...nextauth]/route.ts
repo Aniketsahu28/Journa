@@ -12,6 +12,9 @@ export const authOptions: AuthOptions = {
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60,
   },
+  pages: {
+    signIn: "/accounts/login"
+  },
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -30,14 +33,18 @@ export const authOptions: AuthOptions = {
           where: { email: credentials.email },
         });
 
-        if (!user) return null;
+        if (!user) {
+          throw new Error("User with this email does not exist");
+        }
 
         const passwordMatch = await comparePassword(
           credentials.password,
           user.password as string
         );
 
-        if (!passwordMatch) return null;
+        if (!passwordMatch) {
+          throw new Error("Incorrect password");
+        }
 
         if (user.emailVerified == null) {
           throw new Error("Please verify your email!");

@@ -9,9 +9,7 @@ export default async function Home() {
     redirect("/api/auth/signin");
   }
   return (
-    <div className="flex text-5xl font-semibold items-center justify-center w-full h-[100vh]">
-      <p>Hello from journa</p>
-      <br />
+    <div className="flex items-center justify-center w-full h-[100vh]">
       <TestButton />
     </div>
   );

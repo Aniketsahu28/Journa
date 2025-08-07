@@ -1,6 +1,13 @@
 "use client";
 import { signOut } from "next-auth/react";
+import SecondaryButton from "./Buttons/SecondaryButton";
 
 export default function Button() {
-  return <button onClick={() => signOut()}>signOut</button>;
+  return (
+    <SecondaryButton
+      onClick={() => signOut({ callbackUrl: "/accounts/login" })}
+    >
+      Logout
+    </SecondaryButton>
+  );
 }
