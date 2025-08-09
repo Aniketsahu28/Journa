@@ -3,4 +3,5 @@ export type TButtonProps = {
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
     className?: string
+    disable?: boolean
 }

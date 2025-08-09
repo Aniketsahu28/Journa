@@ -9,7 +9,7 @@ import { errorMessageMap } from "@/lib/utils/oAuthErrorMessageMap";
 import HotToast from "@/components/HotToast";
 import toast from "react-hot-toast";
 
-const LoginOtherOptions = () => {
+const LoginOtherOptions = ({ type }: { type: string }) => {
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
 
@@ -23,7 +23,9 @@ const LoginOtherOptions = () => {
       <span className="flex flex-col gap-4 font-nunito">
         <span className="flex gap-2 items-center justify-center relative">
           <hr className="w-[80%] absolute" />
-          <p className="z-10 bg-white px-4">or sign in with</p>
+          <p className="z-10 bg-white px-4">
+            or {type === "login" ? "login" : "sign up"} with
+          </p>
         </span>
         <SecondaryButton
           type="button"

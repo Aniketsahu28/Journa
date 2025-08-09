@@ -30,15 +30,35 @@ export async function sendEmail({
 export async function sendVerificationEmail(email: string, token: string) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-    if (!baseUrl)
+    if (!baseUrl) {
       throw new Error("Base URL is not defined in environment variables.");
+    }
 
     const verificationUrl = `${baseUrl}/verify?token=${token}&email=${email}`;
 
     await sendEmail({
       to: email,
       subject: "Verify your email",
-      html: `<a href="${verificationUrl}">Click here to verify your email for Journa</a>`,
+      html: `<div style="font-family: Poppins, sans-serif; line-height: 1.5; padding: 20px; background-color: #f9f9f9;">
+              <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px;">
+                <h2 style="color: #333;">Verify Your Email Address</h2>
+                <p>Thank you for signing up! Please verify your email address to activate your account.</p>
+      
+                <a href="${verificationUrl}" style="display: inline-block; margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+                  Verify Email
+                </a>
+
+                <p style="margin-top: 20px; font-size: 14px; color: #555;">
+                  Or copy and paste the following link into your browser:  
+                </p>
+                <p style="word-break: break-all; color: #1a73e8;">${verificationUrl}</p>
+      
+                <hr style="margin: 20px 0;">
+                <p style="font-size: 12px; color: #999;">
+                  If you did not create this account, you can ignore this email.
+                </p>
+              </div>
+            </div>`,
     });
   } catch (error) {
     throw new Error(`Failed to send verification email`);

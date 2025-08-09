@@ -2,24 +2,23 @@
 
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
 import { redirect } from "next/navigation";
-import React from "react";
 
-const SignupRedirect = () => {
-  const redirectToSignup = () => {
-    redirect("/accounts/signup");
+const SigninRedirect = () => {
+  const redirectToSignin = () => {
+    redirect("/accounts/login");
   };
 
   return (
     <p className="font-nunito text-lg text-center">
-      Don't have an account ?{" "}
+      Already have an account ?{" "}
       <TertiaryButton
         className="font-semibold hover:underline hover:leading-4"
-        onClick={redirectToSignup}
+        onClick={redirectToSignin}
       >
-        Sign up
+        Login
       </TertiaryButton>
     </p>
   );
 };
 
-export default SignupRedirect;
+export default SigninRedirect;

@@ -8,7 +8,7 @@ import z from "zod";
 
 export async function POST(req: NextRequest) {
   try {
-    const { name, email, password, dateOfBirth, country } = await req.json();
+    const { name, email, password, dateOfBirth } = await req.json();
     const result = ZUserSignupSchema.safeParse({
       name,
       email,
@@ -31,19 +31,18 @@ export async function POST(req: NextRequest) {
       }
 
       const hashedPassword = await hashPassword(result.data.password);
-      const user = await prisma.user.create({
+      await prisma.user.create({
         data: {
           name: result.data.name,
           email: result.data.email,
           password: hashedPassword,
           dateOfBirth: result.data.dateOfBirth,
-          country
         },
       });
 
       const token = await generateVerificationToken(result.data.email);
-      sendVerificationEmail(result.data.email, token.token);
-      return NextResponse.json({ user }, { status: 200 });
+      await sendVerificationEmail(result.data.email, token.token);
+      return NextResponse.json({ message: "Signup successfull. Welcome to Journa!" }, { status: 201 });
     } else {
       return NextResponse.json(
         { error: z.flattenError(result.error).fieldErrors },

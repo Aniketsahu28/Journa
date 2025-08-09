@@ -5,7 +5,10 @@ import { forwardRef, useState } from "react";
 import IconRenderer from "../IconRenderer/page";
 
 const PasswordInputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
-  ({ name, label, placeholder, onChange, error, required }, ref) => {
+  (
+    { name, label, placeholder, onChange, error, required, className = "" },
+    ref
+  ) => {
     const [showPassword, setShowPassword] = useState(false);
     const toggleVisibility = () =>
       setShowPassword((showPassword) => !showPassword);
@@ -25,9 +28,9 @@ const PasswordInputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
             ref={ref}
             onChange={onChange}
             required={required}
-            className={`text-lg font-nunito w-full px-4 py-2 pr-10 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
+            className={`w-full text-lg font-nunito px-4 py-2 pr-11 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
               error && error?.length > 0 ? "border-red" : "border-black/25"
-            }`}
+            } ${className}`}
           />
           <button
             type="button"
