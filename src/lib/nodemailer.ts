@@ -34,7 +34,7 @@ export async function sendVerificationEmail(email: string, token: string) {
       throw new Error("Base URL is not defined in environment variables.");
     }
 
-    const verificationUrl = `${baseUrl}/verify?token=${token}&email=${email}`;
+    const verificationUrl = `${baseUrl}/accounts/verify?token=${token}&email=${email}`;
 
     await sendEmail({
       to: email,
