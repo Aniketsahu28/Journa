@@ -5,6 +5,7 @@ import TertiaryButton from "@/components/Buttons/TertiaryButton";
 import InputBox from "@/components/Form/InputBox";
 import PasswordInputBox from "@/components/Form/PasswordInputBox";
 import HotToast from "@/components/HotToast";
+import Loader from "@/components/Loader";
 import { TLoginFormError } from "@/types/TLoginFormError";
 import { ZUserLoginSchema } from "@/zod/AuthUI/ZUserLogin";
 import { signIn } from "next-auth/react";
@@ -15,6 +16,7 @@ import z from "zod";
 
 const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<TLoginFormError>({
@@ -24,14 +26,14 @@ const LoginForm = () => {
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setLoading(true);
+
     const email = emailRef.current?.value || "";
     const password = passwordRef.current?.value || "";
-
     const result = ZUserLoginSchema.safeParse({ email, password });
 
     if (result.success) {
       setError({ email: [], password: [] });
-
       const res = await signIn("credentials", {
         redirect: false,
         email: result.data.email,
@@ -46,6 +48,7 @@ const LoginForm = () => {
     } else {
       setError(z.flattenError(result.error).fieldErrors as TLoginFormError);
     }
+    setLoading(false);
   };
 
   return (
@@ -73,7 +76,9 @@ const LoginForm = () => {
         <TertiaryButton className="w-fit self-end -mt-5 text-black">
           Forgot Password?
         </TertiaryButton>
-        <PrimaryButton type="submit">Login</PrimaryButton>
+        <PrimaryButton type="submit" disable={loading}>
+          {loading ? <Loader className="mx-auto" /> : "Login"}
+        </PrimaryButton>
       </form>
       <HotToast />
     </>

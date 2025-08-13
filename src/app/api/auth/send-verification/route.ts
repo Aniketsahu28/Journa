@@ -10,6 +10,6 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json(
     { message: "Verification email sent." },
-    { status: 200 }
+    { status: 201 }
   );
 }

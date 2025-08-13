@@ -4,6 +4,7 @@ import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import InputBox from "@/components/Form/InputBox";
 import PasswordInputBox from "@/components/Form/PasswordInputBox";
 import HotToast from "@/components/HotToast";
+import Loader from "@/components/Loader";
 import axiosInstance from "@/lib/axios";
 import { TSignupFormError } from "@/types/TSignupFormError";
 import { ZUserSignupSchemaUI } from "@/zod/AuthUI/ZUserSignupUI";
@@ -139,7 +140,7 @@ const SignupForm = () => {
           </span>
         </div>
         <PrimaryButton type="submit" className="mt-2" disable={loading}>
-          Sign up
+          {loading ? <Loader className="mx-auto" /> : "Sign up"}
         </PrimaryButton>
       </form>
       <HotToast />
