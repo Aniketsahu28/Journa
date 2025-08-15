@@ -1,5 +1,4 @@
 "use client";
-
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
 import InputBox from "@/components/Form/InputBox";
@@ -9,7 +8,7 @@ import Loader from "@/components/Loader";
 import { TLoginFormError } from "@/types/TLoginFormError";
 import { ZUserLoginSchema } from "@/zod/AuthUI/ZUserLogin";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import z from "zod";
@@ -23,6 +22,10 @@ const LoginForm = () => {
     email: [],
     password: [],
   });
+
+  const redirectToForgotPassword = () => {
+    router.push("/accounts/forgot-password");
+  };
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -73,7 +76,10 @@ const LoginForm = () => {
           required
           className="w-full"
         />
-        <TertiaryButton className="w-fit self-end -mt-5 text-black">
+        <TertiaryButton
+          className="w-fit self-end -mt-5 text-black hover:underline hover:underline-offset-2"
+          onClick={redirectToForgotPassword}
+        >
           Forgot Password?
         </TertiaryButton>
         <PrimaryButton type="submit" disable={loading}>

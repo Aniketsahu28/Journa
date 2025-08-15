@@ -13,7 +13,7 @@ const SignupRedirect = () => {
     <p className="font-nunito text-lg text-center">
       Don't have an account ?{" "}
       <TertiaryButton
-        className="font-semibold hover:underline hover:leading-4"
+        className="font-semibold hover:underline hover:underline-offset-2"
         onClick={redirectToSignup}
       >
         Sign up

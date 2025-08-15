@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   try {
-    const email = req.headers.get("email");
-    const userEnteredOtp = req.headers.get("userEnteredOtp");
+    const { searchParams } = new URL(req.url);
+    const email = searchParams.get("email");
+    const userEnteredOtp = searchParams.get("userEnteredOtp");
 
     if (!email || !userEnteredOtp) {
       return NextResponse.json(

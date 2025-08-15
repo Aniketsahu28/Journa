@@ -1,7 +1,8 @@
+import { hashPassword } from "@/lib/bcrypt";
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function PUT(req: NextRequest) {
+export async function PATCH(req: NextRequest) {
   try {
     const { email, newPassword } = await req.json();
 
@@ -11,13 +12,13 @@ export async function PUT(req: NextRequest) {
         { status: 400 }
       );
     }
-
+    const hashedPassword = await hashPassword(newPassword);
     await prisma.user.update({
       where: {
         email: email,
       },
       data: {
-        password: newPassword,
+        password: hashedPassword,
       },
     });
 

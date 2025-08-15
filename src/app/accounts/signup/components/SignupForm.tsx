@@ -66,9 +66,9 @@ const SignupForm = () => {
           toast.success(res.data.message, { duration: 5000 });
           router.push("/accounts/login");
         }
-      } catch (err) {
-        if (axios.isAxiosError(err)) {
-          toast.error(err.response?.data?.error || "Something went wrong");
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          toast.error(error.response?.data?.error || "Something went wrong");
         } else {
           toast.error("An unexpected error occurred");
         }

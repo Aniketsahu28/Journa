@@ -57,6 +57,9 @@ export async function sendVerificationEmail(email: string, token: string) {
                 <p style="font-size: 12px; color: #999;">
                   If you did not create this account, you can ignore this email.
                 </p>
+                <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                  Thanks,<br/>Journa
+                </p>
               </div>
             </div>`,
     });
@@ -72,14 +75,30 @@ export async function sendForgotPasswordOtp(email: string, otp: string) {
     await sendEmail({
       to: email,
       subject: "One-Time Password (OTP) for Account Verification",
-      html: `<body>
-                <p>Hi there,</p>
-                <p>Your One-Time Password (OTP) is:</p>
-                <h2>${OTP_CODE}</h2>
-                <p>This OTP is valid for 10 minutes. Please do not share it with anyone.</p>
-                <p>If you didn't request this, you can ignore this email.</p>
-                <p>Thanks,<br/>Journa</p>
-            </body>`,
+      html: `<div style="font-family: Poppins, sans-serif; line-height: 1.5; padding: 20px; background-color: #f9f9f9;">
+        <div style="max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 8px;">
+          <h2 style="color: #333;">Your One-Time Password (OTP)</h2>
+          <p>Hi there,</p>
+          <p>Please use the following OTP to complete your request:</p>
+
+          <div style="margin: 20px 0;">
+            <span style="display: inline-block; background-color: #4CAF50; color: white; padding: 12px 24px; font-size: 24px; font-weight: bold; letter-spacing: 4px; border-radius: 5px;">
+              ${OTP_CODE}
+            </span>
+          </div>
+
+          <p>This OTP is valid for <strong>10 minutes</strong>. Please do not share it with anyone.</p>
+
+          <hr style="margin: 20px 0;">
+          <p style="font-size: 12px; color: #999;">
+            If you didn't request this OTP, you can safely ignore this email.
+          </p>
+          <p style="margin-top: 10px; font-size: 12px; color: #999;">
+            Thanks,<br/>Journa
+          </p>
+        </div>
+      </div>`
+
     });
   } catch (error) {
     throw new Error(`Failed to send otp email`);
