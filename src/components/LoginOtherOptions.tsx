@@ -29,7 +29,7 @@ const LoginOtherOptions = ({ type }: { type: string }) => {
         </span>
         <SecondaryButton
           type="button"
-          className="w-[80%] mx-auto flex gap-2 justify-center items-center"
+          className="w-[80%] mx-auto flex gap-2 justify-center items-center text-lg"
           onClick={() => signIn("google", { callbackUrl: "/" })}
         >
           <IconRenderer name="google" />

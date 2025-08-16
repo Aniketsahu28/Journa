@@ -9,7 +9,7 @@ const SigninRedirect = () => {
   };
 
   return (
-    <p className="font-nunito text-lg text-center">
+    <p className="font-nunito sm:text-lg text-center">
       Already have an account ?{" "}
       <TertiaryButton
         className="font-semibold hover:underline hover:underline-offset-2"

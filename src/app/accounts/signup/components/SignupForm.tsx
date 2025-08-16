@@ -1,6 +1,7 @@
 "use client";
 
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
+import { DatePickerBox } from "@/components/Form/DatePickerBox";
 import InputBox from "@/components/Form/InputBox";
 import PasswordInputBox from "@/components/Form/PasswordInputBox";
 import HotToast from "@/components/HotToast";
@@ -17,7 +18,7 @@ import z from "zod";
 const SignupForm = () => {
   const router = useRouter();
   const nameRef = useRef<HTMLInputElement>(null);
-  const dateOfBirthRef = useRef<HTMLInputElement>(null);
+  const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>(undefined);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
@@ -36,7 +37,7 @@ const SignupForm = () => {
 
     const result = ZUserSignupSchemaUI.safeParse({
       name: nameRef.current?.value,
-      dateOfBirth: dateOfBirthRef.current?.value,
+      dateOfBirth: dateOfBirth?.toLocaleDateString(),
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
       confirmPassword: confirmPasswordRef.current?.value,
@@ -83,8 +84,8 @@ const SignupForm = () => {
   return (
     <>
       <form className="flex flex-col gap-6" onSubmit={handleSignup}>
-        <div className="flex gap-6">
-          <span className="w-[60%]">
+        <div className="flex flex-col sm:flex-row gap-6">
+          <span className="sm:w-[60%]">
             <InputBox
               name="name"
               label="Full Name"
@@ -95,14 +96,14 @@ const SignupForm = () => {
               required
             />
           </span>
-          <span className="w-[40%]">
-            <InputBox
+          <span className="w-full sm:w-[40%]">
+            <DatePickerBox
               name="dateOfBirth"
               label="Date of Birth"
-              type="date"
-              ref={dateOfBirthRef}
               error={error?.dateOfBirth}
-              required
+              disableFutureDates={true}
+              value={dateOfBirth}
+              onChange={(date) => setDateOfBirth(date)}
             />
           </span>
         </div>
@@ -117,7 +118,7 @@ const SignupForm = () => {
             required
           />
         </span>
-        <div className="flex gap-6">
+        <div className="flex flex-col sm:flex-row gap-6">
           <span className="w-full">
             <PasswordInputBox
               name="password"

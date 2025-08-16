@@ -82,3 +82,9 @@ div::-webkit-scrollbar-thumb {
 .custom_shadow {
     box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.25);
 }
+
+@media (min-width: 1792px) {
+    .custom_item_center {
+        align-items: center;
+    }
+}

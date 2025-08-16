@@ -9,21 +9,25 @@ import SignupForm from "./components/SignupForm";
 
 const Signup = () => {
   return (
-    <div className="flex h-[100vh] w-full bg-white">
+    <div className="flex py-6 sm:py-0 sm:h-[100vh] w-full bg-white">
       <Image
         src={signupBackground}
         alt="Flight"
-        className="w-[55%] object-cover"
+        className="w-[55%] object-cover hidden lg:block"
       />
-      <div className="w-[45%] flex items-start justify-center px-20 py-10 overflow-y-auto">
+      <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start custom_item_center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20 overflow-y-auto">
         <div className="flex flex-col gap-8 w-full">
           <span className="flex gap-2 items-center">
-            <Image src={journaSquareLogo} alt="journa logo" className="w-10" />
-            <h1 className="font-serifDisplay text-4xl">Journa</h1>
+            <Image
+              src={journaSquareLogo}
+              alt="journa logo"
+              className="w-8 sm:w-10"
+            />
+            <h1 className="font-serifDisplay text-3xl sm:text-4xl">Journa</h1>
           </span>
           <span className="flex flex-col gap-1">
-            <h2 className="font-serifDisplay text-3xl">Sign up</h2>
-            <p className="font-nunito text-lg">
+            <h2 className="font-serifDisplay text-2xl sm:text-3xl">Sign up</h2>
+            <p className="font-nunito leading-5 sm:leading-7 sm:text-lg">
               Your story starts here. Let's create your account.
             </p>
           </span>

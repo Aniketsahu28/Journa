@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased`}
+        className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased bg-white`}
       >
         {children}
       </body>
