@@ -2,10 +2,10 @@ import Image from "next/image";
 import React from "react";
 
 import signupBackground from "@/assets/Images/Backgrounds/SignupBackground.png";
-import journaSquareLogo from "@/assets/Images/Logo/JournaSquareLogo.svg";
 import LoginOtherOptions from "../../../components/LoginOtherOptions";
 import LoginRedirect from "./components/LoginRedirect";
 import SignupForm from "./components/SignupForm";
+import JournaLogo from "@/components/JournaLogo";
 
 const Signup = () => {
   return (
@@ -17,14 +17,7 @@ const Signup = () => {
       />
       <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start custom_item_center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20 overflow-y-auto">
         <div className="flex flex-col gap-8 w-full">
-          <span className="flex gap-2 items-center">
-            <Image
-              src={journaSquareLogo}
-              alt="journa logo"
-              className="w-8 sm:w-10"
-            />
-            <h1 className="font-serifDisplay text-3xl sm:text-4xl">Journa</h1>
-          </span>
+          <JournaLogo />
           <span className="flex flex-col gap-1">
             <h2 className="font-serifDisplay text-2xl sm:text-3xl">Sign up</h2>
             <p className="font-nunito leading-5 sm:leading-7 sm:text-lg">

@@ -4,8 +4,9 @@ import Loader from "@/components/Loader";
 import axiosInstance from "@/lib/axios";
 import { TOtpInputBoxHandle } from "@/types/TOtpInputBoxHandle";
 import axios from "axios";
-import React, { Dispatch, RefObject, SetStateAction, useRef } from "react";
+import React, { Dispatch, SetStateAction, useRef } from "react";
 import toast from "react-hot-toast";
+import ResendOtp from "./ResendOtp";
 
 const OtpForm = ({
   loading,
@@ -51,17 +52,18 @@ const OtpForm = ({
 
   return (
     <div className="flex flex-col gap-12">
-      <p className="font-nunito text-lg mx-auto text-center">
-        Please enter the 6 digit code sent to {email}
+      <p className="font-nunito sm:text-lg mx-auto text-center">
+        Please enter the 5 digit code sent to {email}
       </p>
       <form
         className="flex flex-col gap-10 items-center"
         onSubmit={validateOtp}
       >
-        <OtpInputBox length={6} ref={otpRef} />
+        <OtpInputBox length={5} ref={otpRef} />
         <PrimaryButton className="w-full" type="submit" disable={loading}>
           {loading ? <Loader className="mx-auto" /> : "Submit"}
         </PrimaryButton>
+        <ResendOtp email={email} />
       </form>
     </div>
   );

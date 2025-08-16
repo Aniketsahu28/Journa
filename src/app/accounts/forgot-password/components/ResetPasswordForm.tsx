@@ -71,7 +71,7 @@ const ResetPasswordForm = ({
 
   return (
     <div className="flex flex-col gap-12">
-      <p className="font-nunito text-lg mx-auto text-center">
+      <p className="font-nunito sm:text-lg mx-auto text-center">
         Please reset password
       </p>
       <form className="flex flex-col gap-6" onSubmit={resetPassword}>
@@ -86,7 +86,7 @@ const ResetPasswordForm = ({
         <PasswordInputBox
           name="confirmNewPassword"
           label="Confirm New Password"
-          placeholder="confirm new password"
+          placeholder="Confirm new password"
           ref={confirmNewPasswordRef}
           error={error?.confirmNewPassword}
           required

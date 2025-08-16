@@ -16,7 +16,7 @@ const OtpInputBox = forwardRef<TOtpInputBoxHandle, TOtpInputBoxProps>(
     {
       name = "otp",
       label,
-      length = 6,
+      length = 5,
       value,
       onChange,
       onComplete,

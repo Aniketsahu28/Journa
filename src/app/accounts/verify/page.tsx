@@ -1,9 +1,8 @@
 import React from "react";
 import VerificationSuccessfull from "./components/VerificationSuccessfull";
 import VerificationFailed from "./components/VerificationFailed";
-import Image from "next/image";
-import journaSquareLogo from "@/assets/Images/Logo/JournaSquareLogo.svg";
 import axiosInstance from "@/lib/axios";
+import JournaLogo from "@/components/JournaLogo";
 
 export default async function Verify(props: {
   searchParams: Promise<{ token?: string; email?: string }>;
@@ -26,13 +25,9 @@ export default async function Verify(props: {
     <div
       className={`${
         verificationStatus ? "bg-green/40" : "bg-red/40"
-      } w-full h-[100vh] flex flex-col gap-10 items-center justify-center`}
+      } w-full h-[100vh] flex flex-col gap-10 items-center sm:justify-center px-4 pt-20 sm:p-0`}
     >
-      <span className="flex gap-2 items-center">
-        <Image src={journaSquareLogo} alt="journa logo" className="w-10" />
-        <h1 className="font-serifDisplay text-4xl">Journa</h1>
-      </span>
-
+      <JournaLogo />
       {verificationStatus ? (
         <VerificationSuccessfull />
       ) : (

@@ -68,15 +68,30 @@ div::-webkit-scrollbar-thumb {
 }
 
 .verification-successfull-glow {
-    -webkit-box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
-    -moz-box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
-    box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
+    -webkit-box-shadow: 0px 0px 300px 60px rgba(76, 175, 79, 0.75);
+    -moz-box-shadow: 0px 0px 300px 60px rgba(76, 175, 79, 0.75);
+    box-shadow: 0px 0px 300px 60px rgba(76, 175, 79, 0.75);
 }
 
+
 .verification-failed-glow {
-    -webkit-box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
-    -moz-box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
-    box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
+    -webkit-box-shadow: 0px 0px 300px 60px rgba(219, 40, 40, 0.65);
+    -moz-box-shadow: 0px 0px 300px 60px rgba(219, 40, 40, 0.65);
+    box-shadow: 0px 0px 300px 60px rgba(219, 40, 40, 0.65);
+}
+
+@media (min-width:1024px) {
+    .verification-successfull-glow {
+        -webkit-box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
+        -moz-box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
+        box-shadow: 0px 0px 300px 80px rgba(76, 175, 79, 0.75);
+    }
+
+    .verification-failed-glow {
+        -webkit-box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
+        -moz-box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
+        box-shadow: 0px 0px 300px 80px rgba(219, 40, 40, 0.65);
+    }
 }
 
 .custom_shadow {

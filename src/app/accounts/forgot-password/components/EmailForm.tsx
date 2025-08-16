@@ -48,7 +48,7 @@ const EmailForm = ({
 
   return (
     <div className="flex flex-col gap-12">
-      <p className="font-nunito text-lg mx-auto text-center">
+      <p className="font-nunito sm:text-lg mx-auto text-center">
         Enter the email to receive the OTP
       </p>
       <form className="flex flex-col gap-10" onSubmit={getOtpForEmail}>
