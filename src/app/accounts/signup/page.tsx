@@ -2,10 +2,10 @@ import Image from "next/image";
 import React from "react";
 
 import signupBackground from "@/assets/Images/Backgrounds/SignupBackground.png";
-import LoginOtherOptions from "../../../components/LoginOtherOptions";
+import LoginOtherOptions from "@/components/utils/LoginOtherOptions";
 import LoginRedirect from "./components/LoginRedirect";
 import SignupForm from "./components/SignupForm";
-import JournaLogo from "@/components/JournaLogo";
+import JournaLogo from "@/components/utils/JournaLogo";
 
 const Signup = () => {
   return (

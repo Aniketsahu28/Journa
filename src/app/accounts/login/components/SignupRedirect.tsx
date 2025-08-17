@@ -1,5 +1,4 @@
 "use client";
-
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
 import { redirect } from "next/navigation";
 import React from "react";

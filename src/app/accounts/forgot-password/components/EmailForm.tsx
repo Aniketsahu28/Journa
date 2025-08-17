@@ -1,6 +1,6 @@
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import InputBox from "@/components/Form/InputBox";
-import Loader from "@/components/Loader";
+import InputBox from "@/components/FormElements/InputBox";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";

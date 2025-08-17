@@ -1,5 +1,5 @@
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
-import Loader from "@/components/Loader";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
 import axios from "axios";
 import React, { useState } from "react";

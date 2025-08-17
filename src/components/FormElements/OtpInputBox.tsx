@@ -1,7 +1,7 @@
 "use client";
 
-import { TOtpInputBoxHandle } from "@/types/TOtpInputBoxHandle";
-import { TOtpInputBoxProps } from "@/types/TOtpInputBoxProps";
+import { TOtpInputBoxHandle } from "@/types/formElements/TOtpInputBoxHandle";
+import { TOtpInputBoxProps } from "@/types/formElements/TOtpInputBoxProps";
 import React, {
   forwardRef,
   useEffect,

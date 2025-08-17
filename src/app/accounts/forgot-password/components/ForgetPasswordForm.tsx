@@ -1,6 +1,6 @@
 "use client";
-import HotToast from "@/components/HotToast";
-import React, { useRef, useState } from "react";
+import HotToast from "@/components/utils/HotToast";
+import React, { useState } from "react";
 import EmailForm from "./EmailForm";
 import OtpForm from "./OtpForm";
 import ResetPasswordForm from "./ResetPasswordForm";

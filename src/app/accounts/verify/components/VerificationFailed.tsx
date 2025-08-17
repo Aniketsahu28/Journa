@@ -1,8 +1,8 @@
 "use client";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import HotToast from "@/components/HotToast";
+import HotToast from "@/components/utils/HotToast";
 import IconRenderer from "@/components/IconRenderer/page";
-import Loader from "@/components/Loader";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
 import React, { useState } from "react";
 import toast from "react-hot-toast";

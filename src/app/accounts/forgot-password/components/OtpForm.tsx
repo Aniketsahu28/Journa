@@ -1,8 +1,8 @@
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import OtpInputBox from "@/components/Form/OtpInputBox";
-import Loader from "@/components/Loader";
+import OtpInputBox from "@/components/FormElements/OtpInputBox";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
-import { TOtpInputBoxHandle } from "@/types/TOtpInputBoxHandle";
+import { TOtpInputBoxHandle } from "@/types/formElements/TOtpInputBoxHandle";
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";
 import toast from "react-hot-toast";

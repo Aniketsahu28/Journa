@@ -1,11 +1,11 @@
 "use client";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
-import InputBox from "@/components/Form/InputBox";
-import PasswordInputBox from "@/components/Form/PasswordInputBox";
-import HotToast from "@/components/HotToast";
-import Loader from "@/components/Loader";
-import { TLoginFormError } from "@/types/TLoginFormError";
+import InputBox from "@/components/FormElements/InputBox";
+import PasswordInputBox from "@/components/FormElements/PasswordInputBox";
+import HotToast from "@/components/utils/HotToast";
+import Loader from "@/components/utils/Loader";
+import { TLoginFormError } from "../types/TLoginFormError";
 import { ZUserLoginSchema } from "@/zod/AuthUI/ZUserLogin";
 import { signIn } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";

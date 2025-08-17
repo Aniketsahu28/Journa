@@ -1,6 +1,6 @@
 "use client";
 
-import { TInputBoxProps } from "@/types/TInputBoxProps";
+import { TInputBoxProps } from "@/types/formElements/TInputBoxProps";
 import { forwardRef, useState } from "react";
 import IconRenderer from "../IconRenderer/page";
 

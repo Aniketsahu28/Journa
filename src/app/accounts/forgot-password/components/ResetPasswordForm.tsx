@@ -1,9 +1,9 @@
 "use client";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import PasswordInputBox from "@/components/Form/PasswordInputBox";
-import Loader from "@/components/Loader";
+import PasswordInputBox from "@/components/FormElements/PasswordInputBox";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
-import { TResetPasswordError } from "@/types/TResetPasswordError";
+import { TResetPasswordError } from "../types/TResetPasswordError";
 import { ZResetPassword } from "@/zod/AuthUI/ZResetPassword";
 import axios from "axios";
 import { useRouter } from "next/navigation";

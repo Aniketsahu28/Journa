@@ -1,13 +1,13 @@
 "use client";
 
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
-import { DatePickerBox } from "@/components/Form/DatePickerBox";
-import InputBox from "@/components/Form/InputBox";
-import PasswordInputBox from "@/components/Form/PasswordInputBox";
-import HotToast from "@/components/HotToast";
-import Loader from "@/components/Loader";
+import { DatePickerBox } from "@/components/FormElements/DatePickerBox";
+import InputBox from "@/components/FormElements/InputBox";
+import PasswordInputBox from "@/components/FormElements/PasswordInputBox";
+import HotToast from "@/components/utils/HotToast";
+import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
-import { TSignupFormError } from "@/types/TSignupFormError";
+import { TSignupFormError } from "../types/TSignupFormError";
 import { ZUserSignupSchemaUI } from "@/zod/AuthUI/ZUserSignupUI";
 import axios from "axios";
 import { useRouter } from "next/navigation";

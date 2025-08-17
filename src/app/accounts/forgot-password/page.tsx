@@ -1,6 +1,6 @@
 import React from "react";
 import ForgetPasswordForm from "./components/ForgetPasswordForm";
-import JournaLogo from "@/components/JournaLogo";
+import JournaLogo from "@/components/utils/JournaLogo";
 
 const ForgotPassword = () => {
   return (

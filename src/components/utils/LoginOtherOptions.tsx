@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react";
 import React from "react";
 import { useSearchParams } from "next/navigation";
 import { errorMessageMap } from "@/lib/utils/oAuthErrorMessageMap";
-import HotToast from "@/components/HotToast";
+import HotToast from "./HotToast";
 import toast from "react-hot-toast";
 
 const LoginOtherOptions = ({ type }: { type: string }) => {

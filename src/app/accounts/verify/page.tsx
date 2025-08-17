@@ -2,7 +2,7 @@ import React from "react";
 import VerificationSuccessfull from "./components/VerificationSuccessfull";
 import VerificationFailed from "./components/VerificationFailed";
 import axiosInstance from "@/lib/axios";
-import JournaLogo from "@/components/JournaLogo";
+import JournaLogo from "@/components/utils/JournaLogo";
 
 export default async function Verify(props: {
   searchParams: Promise<{ token?: string; email?: string }>;
