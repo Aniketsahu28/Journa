@@ -15,7 +15,7 @@ const Signup = () => {
         alt="Flight"
         className="w-[55%] object-cover hidden lg:block"
       />
-      <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start custom_item_center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20 overflow-y-auto">
+      <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start 3xl:items-center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20 overflow-y-auto">
         <div className="flex flex-col gap-8 w-full">
           <JournaLogo />
           <span className="flex flex-col gap-1">

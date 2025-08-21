@@ -13,7 +13,7 @@ export async function middleware(req: NextRequest) {
     }
 
     const requestHeaders = new Headers(req.headers);
-    requestHeaders.set("userId", payload.userId as string);
+    requestHeaders.set("userId", payload.id as string);
 
     return NextResponse.next({
       request: {

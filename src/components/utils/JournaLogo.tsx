@@ -2,9 +2,9 @@ import Image from "next/image";
 import React from "react";
 import journaSquareLogo from "@/assets/Images/Logo/JournaSquareLogo.svg";
 
-const JournaLogo = () => {
+const JournaLogo = ({ className }: { className?: string }) => {
   return (
-    <span className="flex gap-2 items-center">
+    <span className={`flex gap-2 items-center ${className}`}>
       <Image src={journaSquareLogo} alt="journa logo" className="w-8 sm:w-10" />
       <h1 className="font-serifDisplay text-3xl sm:text-4xl">Journa</h1>
     </span>

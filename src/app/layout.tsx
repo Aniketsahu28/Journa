@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Serif_Display, Poppins, Nunito } from "next/font/google";
 import "./globals.css";
+import SessionProviderContext from "@/components/Providers/SessionProviderContext";
+import StoreProvider from "@/components/Providers/StoreProvider";
 
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-dm-serif-display",
@@ -32,12 +34,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased bg-white`}
-      >
-        {children}
-      </body>
-    </html>
+    <SessionProviderContext>
+      <StoreProvider>
+        <html lang="en">
+          <body
+            className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased bg-white`}
+          >
+            {children}
+          </body>
+        </html>
+      </StoreProvider>
+    </SessionProviderContext>
   );
 }

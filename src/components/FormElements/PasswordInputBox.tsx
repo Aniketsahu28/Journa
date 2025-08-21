@@ -39,9 +39,9 @@ const PasswordInputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
             tabIndex={-1}
           >
             {showPassword ? (
-              <IconRenderer name="EyeSlash" />
+              <IconRenderer name="EyeSlash" size={24} />
             ) : (
-              <IconRenderer name="Eye" />
+              <IconRenderer name="Eye" size={24} />
             )}
           </button>
         </div>

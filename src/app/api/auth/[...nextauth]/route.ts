@@ -4,7 +4,6 @@ import NextAuth, { AuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { JWT } from "next-auth/jwt";
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -52,6 +51,11 @@ export const authOptions: AuthOptions = {
 
         return {
           id: user.id.toString(),
+          name: user.name,
+          email: user.email,
+          image: user.image,
+          dateOfBirth: user.dateOfBirth ? new Date(user.dateOfBirth) : null,
+          country: user.country
         };
       },
     }),
@@ -61,12 +65,26 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }: { token: JWT; user: any }) {
-      if (user) token.userId = user.id;
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+        token.name = user.name
+        token.email = user.email
+        token.image = user.image
+        token.dateOfBirth = user.dateOfBirth
+        token.country = user.country
+      };
       return token;
     },
-    async session({ session, token }: { session: any; token: JWT }) {
-      if (session.user && token.userId) session.user.userId = token.userId;
+    async session({ session, token }) {
+      session.user = {
+        id: token.id,
+        name: token.name,
+        email: token.email,
+        image: token.image,
+        dateOfBirth: token.dateOfBirth,
+        country: token.country
+      }
       return session;
     },
   },

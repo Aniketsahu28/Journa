@@ -1,0 +1,74 @@
+"use client";
+import { useState } from "react";
+import TertiaryButton from "../Buttons/TertiaryButton";
+import IconRenderer from "../IconRenderer/page";
+import { TCategoryItemProps } from "./types/TCategoryItemProps";
+
+const CategoryItem = ({
+  category,
+  activeCategory,
+  setActiveCategory,
+}: TCategoryItemProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      {/* parent row */}
+      <span
+        onClick={() => setActiveCategory(category.id)}
+        className={`flex items-center justify-between w-full rounded-md group cursor-pointer ${
+          category.children.length > 0 ? "p-1" : "py-2 hover:py-[5px]"
+        } ${
+          activeCategory === category.id
+            ? "bg-yellow_300"
+            : "hover:bg-yellow_400"
+        }`}
+      >
+        <span className="flex items-center gap-2">
+          {category.children.length > 0 && (
+            <TertiaryButton
+              onClick={(event) => {
+                event?.stopPropagation(); // prevent selecting category
+                setIsOpen(!isOpen);
+              }}
+              className="p-1 rounded-sm hover:bg-yellow_100 transition-transform"
+            >
+              <IconRenderer
+                name="Arrow"
+                className={`transform transition-transform duration-300 ${
+                  isOpen ? "rotate-0" : "-rotate-90"
+                }`}
+              />
+            </TertiaryButton>
+          )}
+          <p className={`${category.children.length == 0 && "pl-2"}`}>
+            {category.name}
+          </p>
+        </span>
+        <TertiaryButton className={`p-1 rounded-sm hover:bg-yellow_200`}>
+          <IconRenderer name="MoreInfo" className="hidden group-hover:block" />
+        </TertiaryButton>
+      </span>
+
+      {/* children with smooth transition */}
+      <div
+        className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out border-l-2 border-yellow_100 ${
+          isOpen ? "opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col">
+          {category.children.map((child) => (
+            <CategoryItem
+              key={child.id}
+              category={child}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CategoryItem;

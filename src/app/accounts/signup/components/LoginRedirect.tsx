@@ -1,11 +1,12 @@
 "use client";
 
 import TertiaryButton from "@/components/Buttons/TertiaryButton";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const SigninRedirect = () => {
+  const router = useRouter();
   const redirectToSignin = () => {
-    redirect("/accounts/login");
+    router.push("/accounts/login");
   };
 
   return (

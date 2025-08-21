@@ -8,7 +8,7 @@ import Loader from "@/components/utils/Loader";
 import { TLoginFormError } from "../types/TLoginFormError";
 import { ZUserLoginSchema } from "@/zod/AuthUI/ZUserLogin";
 import { signIn } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import toast from "react-hot-toast";
 import z from "zod";

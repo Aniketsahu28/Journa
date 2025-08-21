@@ -1,6 +1,6 @@
 "use client";
 import { signOut } from "next-auth/react";
-import SecondaryButton from "./Buttons/SecondaryButton";
+import SecondaryButton from "./SecondaryButton";
 
 export default function Button() {
   return (
