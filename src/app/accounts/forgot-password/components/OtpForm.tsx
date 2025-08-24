@@ -5,8 +5,8 @@ import axiosInstance from "@/lib/axios";
 import { TOtpInputBoxHandle } from "@/types/formElements/TOtpInputBoxHandle";
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";
-import toast from "react-hot-toast";
 import ResendOtp from "./ResendOtp";
+import HotToast from "@/components/utils/HotToast";
 
 const OtpForm = ({
   loading,
@@ -26,8 +26,7 @@ const OtpForm = ({
     setLoading(true);
     try {
       if (!otpRef.current?.getValue()) {
-        toast.error("OTP is required");
-        return;
+        return <HotToast type="error" message="OTP is required" />;
       }
 
       await axiosInstance.get("/api/verify-otp", {
@@ -41,9 +40,14 @@ const OtpForm = ({
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error)) {
-        toast.error(error?.response?.data?.error || "Something went wrong");
+        return (
+          <HotToast
+            type="error"
+            message={error?.response?.data?.error || "Something went wrong"}
+          />
+        );
       } else {
-        toast.error("An unexpected error occured");
+        return <HotToast type="error" message="An unexpected error occured" />;
       }
     } finally {
       setLoading(false);

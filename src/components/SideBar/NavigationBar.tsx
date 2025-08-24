@@ -17,8 +17,8 @@ const NavigationBar = () => {
     <div className="relative">
       {/* NavigationBar */}
       <div
-        className={`bg-yellow_500 h-screen w-72 p-5 font-poppins flex flex-col gap-8 duration-500 ease-out ${
-          openNavigation ? "translate-x-0" : "-translate-x-72"
+        className={`bg-yellow_500 h-screen p-5 font-poppins flex flex-col gap-8 duration-300 transition-all ${
+          openNavigation ? "translate-x-0 w-72" : "-translate-x-72 w-0"
         }`}
       >
         <Profile />
@@ -30,7 +30,7 @@ const NavigationBar = () => {
 
       {/* NavigationBar toggle */}
       <TertiaryButton
-        className={`p-1 rounded-md hover:bg-yellow_400 absolute top-6 transition-all duration-500
+        className={`p-1 rounded-md hover:bg-yellow_400 absolute top-6 transition-all duration-300
           ${openNavigation ? "left-60" : "left-2"}`}
         onClick={toggleNavigationBar}
       >

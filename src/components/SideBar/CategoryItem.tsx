@@ -3,23 +3,30 @@ import { useState } from "react";
 import TertiaryButton from "../Buttons/TertiaryButton";
 import IconRenderer from "../IconRenderer/page";
 import { TCategoryItemProps } from "./types/TCategoryItemProps";
+import { useRouter } from "next/navigation";
 
 const CategoryItem = ({
   category,
   activeCategory,
-  setActiveCategory,
+  handleSetActiveCategory,
 }: TCategoryItemProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
+  const [openSubCategories, setOpenSubCategories] = useState(false);
+
+  const handleCategoryClick = () => {
+    handleSetActiveCategory(category.id as number, category.name as string);
+    router.push(`/category/${category.id}`);
+  };
 
   return (
     <div>
       {/* parent row */}
       <span
-        onClick={() => setActiveCategory(category.id)}
+        onClick={handleCategoryClick}
         className={`flex items-center justify-between w-full rounded-md group cursor-pointer ${
           category.children.length > 0 ? "p-1" : "py-2 hover:py-[5px]"
         } ${
-          activeCategory === category.id
+          activeCategory?.categoryId === category.id
             ? "bg-yellow_300"
             : "hover:bg-yellow_400"
         }`}
@@ -29,14 +36,14 @@ const CategoryItem = ({
             <TertiaryButton
               onClick={(event) => {
                 event?.stopPropagation(); // prevent selecting category
-                setIsOpen(!isOpen);
+                setOpenSubCategories(!openSubCategories);
               }}
               className="p-1 rounded-sm hover:bg-yellow_100 transition-transform"
             >
               <IconRenderer
                 name="Arrow"
                 className={`transform transition-transform duration-300 ${
-                  isOpen ? "rotate-0" : "-rotate-90"
+                  openSubCategories ? "rotate-0" : "-rotate-90"
                 }`}
               />
             </TertiaryButton>
@@ -53,7 +60,7 @@ const CategoryItem = ({
       {/* children with smooth transition */}
       <div
         className={`ml-4 overflow-hidden transition-all duration-300 ease-in-out border-l-2 border-yellow_100 ${
-          isOpen ? "opacity-100" : "max-h-0 opacity-0"
+          openSubCategories ? "opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="flex flex-col">
@@ -62,7 +69,7 @@ const CategoryItem = ({
               key={child.id}
               category={child}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              handleSetActiveCategory={handleSetActiveCategory}
             />
           ))}
         </div>

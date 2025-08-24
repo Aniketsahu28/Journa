@@ -8,8 +8,8 @@ import { ZResetPassword } from "@/zod/AuthUI/ZResetPassword";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
-import toast from "react-hot-toast";
 import z from "zod";
+import HotToast from "@/components/utils/HotToast";
 
 const ResetPasswordForm = ({
   loading,
@@ -44,9 +44,12 @@ const ResetPasswordForm = ({
         });
 
         if (resposne.status == 200) {
-          toast.success("Your password has been reset successfully", {
-            duration: 4000,
-          });
+          return (
+            <HotToast
+              type="success"
+              message="Your password has been reset successfully"
+            />
+          );
           router.push("/accounts/login");
         }
       } else {
@@ -56,13 +59,14 @@ const ResetPasswordForm = ({
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(
-          error?.response?.data?.error ||
-            "Something went wrong, please try again",
-          { duration: 4000 }
+        return (
+          <HotToast
+            type="error"
+            message={error?.response?.data?.error || "Something went wrong"}
+          />
         );
       } else {
-        toast.error("An unexpected error occured");
+        return <HotToast type="error" message="An unexpected error occured" />;
       }
     } finally {
       setLoading(false);

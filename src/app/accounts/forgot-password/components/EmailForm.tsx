@@ -1,10 +1,10 @@
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import InputBox from "@/components/FormElements/InputBox";
+import HotToast from "@/components/utils/HotToast";
 import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";
-import toast from "react-hot-toast";
 
 const EmailForm = ({
   loading,
@@ -36,11 +36,14 @@ const EmailForm = ({
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        toast.error(error?.response?.data?.error || "Something went wrong", {
-          duration: 4000,
-        });
+        return (
+          <HotToast
+            type="error"
+            message={error?.response?.data?.error || "Something went wrong"}
+          />
+        );
       } else {
-        toast.error("An unexpected error occurred");
+        return <HotToast type="error" message="An unexpected error occurred" />;
       }
     }
     setLoading(false);

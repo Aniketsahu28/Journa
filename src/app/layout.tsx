@@ -3,6 +3,9 @@ import { DM_Serif_Display, Poppins, Nunito } from "next/font/google";
 import "./globals.css";
 import SessionProviderContext from "@/components/Providers/SessionProviderContext";
 import StoreProvider from "@/components/Providers/StoreProvider";
+import NavigationBar from "@/components/SideBar/NavigationBar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-dm-serif-display",
@@ -28,22 +31,29 @@ export const metadata: Metadata = {
     "Welcome to Journa, a beautifully designed bucket list maker created to help you capture dreams, plan milestones, and celebrate achievements - all in one place.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession(authOptions);
+
   return (
-    <SessionProviderContext>
-      <StoreProvider>
-        <html lang="en">
-          <body
-            className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased bg-white`}
-          >
-            {children}
-          </body>
-        </html>
-      </StoreProvider>
-    </SessionProviderContext>
+    <html lang="en">
+      <body
+        className={`${dmSerifDisplay.variable} ${poppins.variable} ${nunito.variable} antialiased bg-white`}
+      >
+        <SessionProviderContext>
+          <StoreProvider>
+            <div className="relative flex">
+              {session && <NavigationBar />}
+              <main className="flex-1 transition-all duration-300">
+                {children}
+              </main>
+            </div>
+          </StoreProvider>
+        </SessionProviderContext>
+      </body>
+    </html>
   );
 }

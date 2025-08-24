@@ -10,7 +10,6 @@ import { ZUserLoginSchema } from "@/zod/AuthUI/ZUserLogin";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
-import toast from "react-hot-toast";
 import z from "zod";
 
 const LoginForm = () => {
@@ -46,7 +45,7 @@ const LoginForm = () => {
       if (res?.ok) {
         router.push("/");
       } else {
-        toast.error(res?.error as string, { duration: 4000 });
+        return <HotToast type="error" message={res?.error as string} />;
       }
     } else {
       setError(z.flattenError(result.error).fieldErrors as TLoginFormError);
@@ -55,39 +54,36 @@ const LoginForm = () => {
   };
 
   return (
-    <>
-      <form className="flex flex-col gap-6" onSubmit={handleLogin}>
-        <InputBox
-          name="Email"
-          label="Email"
-          type="email"
-          placeholder="johndoe@gmail.com"
-          ref={emailRef}
-          error={error?.email}
-          required
-          className="w-full"
-        />
-        <PasswordInputBox
-          name="Password"
-          label="Password"
-          placeholder="Enter your password"
-          ref={passwordRef}
-          error={error?.password}
-          required
-          className="w-full"
-        />
-        <TertiaryButton
-          className="w-fit self-end -mt-5 text-black hover:underline hover:underline-offset-2"
-          onClick={redirectToForgotPassword}
-        >
-          Forgot Password?
-        </TertiaryButton>
-        <PrimaryButton type="submit" disable={loading}>
-          {loading ? <Loader className="mx-auto" /> : "Login"}
-        </PrimaryButton>
-      </form>
-      <HotToast />
-    </>
+    <form className="flex flex-col gap-6" onSubmit={handleLogin}>
+      <InputBox
+        name="Email"
+        label="Email"
+        type="email"
+        placeholder="johndoe@gmail.com"
+        ref={emailRef}
+        error={error?.email}
+        required
+        className="w-full"
+      />
+      <PasswordInputBox
+        name="Password"
+        label="Password"
+        placeholder="Enter your password"
+        ref={passwordRef}
+        error={error?.password}
+        required
+        className="w-full"
+      />
+      <TertiaryButton
+        className="w-fit self-end -mt-5 text-black hover:underline hover:underline-offset-2"
+        onClick={redirectToForgotPassword}
+      >
+        Forgot Password?
+      </TertiaryButton>
+      <PrimaryButton type="submit" disable={loading}>
+        {loading ? <Loader className="mx-auto" /> : "Login"}
+      </PrimaryButton>
+    </form>
   );
 };
 

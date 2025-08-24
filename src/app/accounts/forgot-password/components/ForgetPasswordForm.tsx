@@ -1,5 +1,4 @@
 "use client";
-import HotToast from "@/components/utils/HotToast";
 import React, { useState } from "react";
 import EmailForm from "./EmailForm";
 import OtpForm from "./OtpForm";
@@ -33,7 +32,6 @@ const ForgetPasswordForm = () => {
           email={email}
         />
       )}
-      <HotToast />
     </>
   );
 };

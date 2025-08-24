@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { FaRegCalendarAlt } from "react-icons/fa";
+import { IoCalendarClearOutline } from "react-icons/io5";
 
 type TDatePicker = {
   name: string;
@@ -48,7 +48,7 @@ export function DatePickerBox({
             } ${className}`}
           >
             <span>{value ? value.toLocaleDateString() : "dd-mm-yyyy"}</span>
-            <FaRegCalendarAlt className="text-black/50" size={22} />
+            <IoCalendarClearOutline className="text-black/75" size={22} />
           </div>
         </PopoverTrigger>
         <PopoverContent

@@ -1,7 +1,8 @@
+import { TActiveCategory } from "@/types/category/TActiveCategory";
 import { TCategoryTree } from "./TCategoryTree";
 
 export type TCategoryItemProps = {
     category: TCategoryTree;
-    activeCategory: number | null;
-    setActiveCategory: (id: number | null) => void;
+    activeCategory: TActiveCategory;
+    handleSetActiveCategory: (categoryId: number, categoryName: string) => void;
 };
