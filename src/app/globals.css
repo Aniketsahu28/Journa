@@ -14,6 +14,8 @@
     --color-yellow_400: #FFE6AE;
     --color-yellow_500: #FFF9EB;
 
+    --text-normal: 15px;
+
     --breakpoint-3xl: 112rem;
 }
 
@@ -102,4 +104,39 @@ div::-webkit-scrollbar-thumb {
 
 .custom_shadow_hover:hover {
     box-shadow: 0 0 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* Popup animation */
+@layer utilities {
+    @keyframes fade-in-zoom {
+        0% {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    @keyframes fade-out-zoom {
+        0% {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+    }
+
+    .animate-fade-in-zoom {
+        animation: fade-in-zoom 75ms ease-out forwards;
+    }
+
+    .animate-fade-out-zoom {
+        animation: fade-out-zoom 50ms ease-in forwards;
+    }
 }

@@ -38,6 +38,9 @@ const Categories = () => {
       <span className="flex justify-between">
         <p className="font-medium">Categories</p>
         <span className="flex gap-0">
+          <TertiaryButton className={`p-1 rounded-md hover:bg-yellow_400`}>
+            <IconRenderer name="Plus" />
+          </TertiaryButton>
           <TertiaryButton
             className={`p-1 rounded-md ${
               openCategories ? "hover:bg-yellow_400" : "bg-yellow_400"
@@ -52,9 +55,6 @@ const Categories = () => {
                 openCategories ? "rotate-0" : "-rotate-90"
               }`}
             />
-          </TertiaryButton>
-          <TertiaryButton className={`p-1 rounded-md hover:bg-yellow_400`}>
-            <IconRenderer name="Plus" />
           </TertiaryButton>
         </span>
       </span>

@@ -6,11 +6,11 @@ import { IconName } from "../IconRenderer/Icons/page";
 
 const QuickAccess = () => {
   return (
-    <div>
+    <div className="-mt-2">
       {quickAccess.map((item, index) => (
         <TertiaryButton
           key={index}
-          className="flex gap-2 w-full p-2 rounded-md hover:bg-yellow_400 "
+          className="flex gap-2 w-full p-2 rounded-md hover:bg-yellow_400 text-[15px]"
         >
           <IconRenderer name={item.icon as IconName} />
           <p>{item.name}</p>

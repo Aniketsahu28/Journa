@@ -21,9 +21,9 @@ export default async function categoryBucketlist(props: {
   }
 
   return (
-    <div className="p-5 pl-6 flex flex-col gap-14">
+    <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen">
       <CategoryBucketlistHeader />
-      <div className="flex gap-10 px-2 w-full">
+      <div className="flex flex-col sm:flex-row gap-10 px-2 w-full">
         {data?.map((bucketItem) => (
           <BucketItem key={bucketItem.id} bucketItem={bucketItem} />
         ))}

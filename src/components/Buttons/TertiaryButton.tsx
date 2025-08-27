@@ -5,12 +5,14 @@ const TertiaryButton = ({
   onClick,
   type = "button",
   className = "",
+  style,
 }: TButtonProps) => {
   return (
     <button
       onClick={onClick}
       type={type}
-      className={`${className} cursor-pointer`}
+      className={`${className} cursor-pointer rounded-md items-center`}
+      style={style}
     >
       {children}
     </button>

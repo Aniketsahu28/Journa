@@ -8,6 +8,6 @@ export default async function Home() {
     redirect("/accounts/login");
   }
   return (
-    <div className="w-full h-full bg-white text-xl p-5 pt-6">Welcome home</div>
+    <div className="w-full h-full bg-white text-xl p-5 pt-4">Welcome home</div>
   );
 }

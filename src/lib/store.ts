@@ -3,16 +3,18 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import storage from "redux-persist/lib/storage";
 import userInfoReducer from "@/lib/features/user/userInfoSlice";
 import activeCategoryReducer from "@/lib/features/category/activeCategorySlice";
+import navigationReducer from "@/lib/features/navigation/navigationSlice";
 
 const rootReducer = combineReducers({
     userInfo: userInfoReducer,
-    activeCategory: activeCategoryReducer
+    activeCategory: activeCategoryReducer,
+    navigation: navigationReducer
 });
 
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["activeCategory"], // ✅ only persist whitelist slices
+    whitelist: ["activeCategory", "navigation"], // ✅ only persist whitelist slices
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

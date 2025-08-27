@@ -11,11 +11,11 @@ const CategoryBucketlistHeader = () => {
     (state) => state.activeCategory.activeCategory
   );
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex flex-col sm:flex-row justify-between items-center">
       <h1 className="text-xl font-poppins font-medium">
         {activeCategory?.categoryName}
       </h1>
-      <div className="flex gap-3 items-center">
+      <div className="flex flex-col sm:flex-row gap-3 items-center">
         <PrimaryButton className="w-full px-6">Add Item</PrimaryButton>
         <InputBox name="Search" placeholder="Search..." />
         <TertiaryButton className="hover:bg-yellow_400 p-2.5 rounded-md">

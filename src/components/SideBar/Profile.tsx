@@ -1,14 +1,23 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import IconRenderer from "../IconRenderer/page";
 import UserAvatar from "@/assets/Images/User/UserAvatar.jpg";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
 import { setUserInfo } from "@/lib/features/user/userInfoSlice";
+import TertiaryButton from "../Buttons/TertiaryButton";
+import Loader from "../utils/Loader";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const Profile = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const { data: session } = useSession();
+  const userInfo = useAppSelector((state) => state.userInfo.userInfo);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -26,23 +35,54 @@ const Profile = () => {
     }
   }, [session]);
 
-  const userInfo = useAppSelector((state) => state.userInfo.userInfo);
+  const handleSignOut = async () => {
+    setLoading(true);
+    await signOut({ callbackUrl: "/accounts/login" });
+    setLoading(false);
+  };
 
   return (
-    <div className="flex items-center justify-between">
-      <span className="flex items-center gap-2">
-        <Image
-          src={userInfo?.image ?? UserAvatar}
-          alt="User Avatar"
-          className="w-9 object-contain rounded-full"
-          width={40}
-          height={40}
-        />
-        <span className="flex items-center gap-2">
-          <p className="text-lg">{userInfo?.name}</p>
-          <IconRenderer name="Arrow" size={20} />
-        </span>
-      </span>
+    <div className="flex items-center relative text-normal">
+      <Popover>
+        <PopoverTrigger
+          className={`py-1 px-2 hover:bg-yellow_400 flex items-center gap-2 rounded-md cursor-pointer`}
+        >
+          <Image
+            src={userInfo?.image ?? UserAvatar}
+            alt="User Avatar"
+            className="w-8 object-contain rounded-full"
+            width={40}
+            height={40}
+          />
+          <span className="flex items-center gap-2">
+            <p>{userInfo?.name}</p>
+            <IconRenderer name="Arrow" size={18} className="-rotate-90" />
+          </span>
+        </PopoverTrigger>
+        <PopoverContent
+          className="bg-white p-1 border-0 custom_shadow w-64 animate-fade-in-zoom font-poppins text-normal"
+          side="bottom"
+          align="start"
+        >
+          <TertiaryButton className="flex gap-2 w-full p-2 rounded-md hover:bg-yellow_400 ">
+            <IconRenderer name="Settings" />
+            <p>Settings</p>
+          </TertiaryButton>
+          <TertiaryButton
+            className="flex gap-2 w-full p-2 rounded-md hover:bg-red hover:text-white text-red"
+            onClick={handleSignOut}
+          >
+            {loading ? (
+              <Loader />
+            ) : (
+              <>
+                <IconRenderer name="Logout" />
+                <p>Logout</p>
+              </>
+            )}
+          </TertiaryButton>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
