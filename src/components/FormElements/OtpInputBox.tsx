@@ -160,7 +160,7 @@ const OtpInputBox = forwardRef<TOtpInputBoxHandle, TOtpInputBoxProps>(
     return (
       <div className={`flex flex-col gap-1 ${className}`}>
         {label && (
-          <label htmlFor={name} className="text-black/70 font-poppins">
+          <label htmlFor={name} className="text-black/70 font-nunito">
             {label} {required ? "*" : null}
           </label>
         )}
@@ -182,7 +182,7 @@ const OtpInputBox = forwardRef<TOtpInputBoxHandle, TOtpInputBoxProps>(
               onPaste={handlePaste(i)}
               disabled={disabled}
               required={required && i === 0} // satisfy required without spamming
-              className={`text-lg font-nunito px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition text-center w-12
+              className={`font-nunito px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition text-center w-12
                 ${error && error.length > 0 ? "border-red" : "border-black/25"}
                 ${inputClassName}`}
             />

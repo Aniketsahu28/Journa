@@ -33,7 +33,7 @@ export function DatePickerBox({
   return (
     <div className="flex flex-col gap-1 w-full">
       {label && (
-        <label htmlFor={name} className="text-black/70 font-poppins">
+        <label htmlFor={name} className="text-black/70 font-nunito">
           {label}
         </label>
       )}
@@ -43,7 +43,7 @@ export function DatePickerBox({
           <div
             id={name}
             tabIndex={0}
-            className={`flex items-center justify-between w-full text-lg font-nunito px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
+            className={`flex items-center justify-between w-full font-nunito px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
               error && error?.length > 0 ? "border-red" : "border-black/25"
             } ${className}`}
           >

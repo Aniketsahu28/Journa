@@ -11,7 +11,7 @@ const TertiaryButton = ({
     <button
       onClick={onClick}
       type={type}
-      className={`${className} cursor-pointer rounded-md items-center`}
+      className={`${className} cursor-pointer font-nunito rounded-md items-center`}
       style={style}
     >
       {children}

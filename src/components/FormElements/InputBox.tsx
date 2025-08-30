@@ -8,19 +8,20 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
     {
       name,
       label,
-      type,
+      type = "text",
       placeholder,
       onChange,
       error,
       required,
       className = "",
+      defaultValue,
     },
     ref
   ) => {
     return (
       <div className="flex flex-col gap-1 w-full">
         {label && (
-          <label htmlFor={name} className="text-black/70 font-poppins">
+          <label htmlFor={name} className="text-black font-nunito">
             {label}
           </label>
         )}
@@ -31,7 +32,8 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
           onChange={onChange}
           ref={ref}
           required={required}
-          className={`text-lg font-nunito px-4 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
+          defaultValue={defaultValue}
+          className={`font-nunito px-3 py-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-black transition ${
             error && error?.length > 0 ? "border-red" : "border-black/25"
           } ${className}`}
         />

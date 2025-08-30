@@ -4,11 +4,13 @@ import storage from "redux-persist/lib/storage";
 import userInfoReducer from "@/lib/features/user/userInfoSlice";
 import activeCategoryReducer from "@/lib/features/category/activeCategorySlice";
 import navigationReducer from "@/lib/features/navigation/navigationSlice";
+import rawCategoryReducer from "@/lib/features/category/rawCategorySlice";
 
 const rootReducer = combineReducers({
     userInfo: userInfoReducer,
     activeCategory: activeCategoryReducer,
-    navigation: navigationReducer
+    navigation: navigationReducer,
+    rawCategory: rawCategoryReducer,
 });
 
 const persistConfig = {

@@ -4,7 +4,7 @@ import React from "react";
 
 const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
   return (
-    <div className="p-3 rounded-md border hover:border-black/25 border-black/10 flex flex-1 gap-4 items-start">
+    <div className="p-3 rounded-lg border hover:border-black/25 border-black/10 flex flex-1 gap-4 items-start">
       <input
         type="radio"
         name="Complete"

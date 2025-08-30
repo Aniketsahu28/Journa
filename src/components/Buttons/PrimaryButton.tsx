@@ -6,13 +6,15 @@ const PrimaryButton = ({
   type = "button",
   className = "",
   disable,
+  style,
 }: TButtonProps) => {
   return (
     <button
       onClick={onClick}
       type={type}
       disabled={disable}
-      className={`${className} bg-yellow_100 font-poppins text-lg rounded-lg text-black p-2 custom_shadow_hover cursor-pointer`}
+      style={style}
+      className={`${className} bg-yellow_100 font-poppins font-medium rounded-md text-black p-2 custom_shadow_hover cursor-pointer`}
     >
       {children}
     </button>

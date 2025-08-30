@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
     try {
         const userId = req.headers.get('userId');
-        console.log(userId)
         const { name, parentId } = await req.json();
         if (!name) {
             return NextResponse.json(
@@ -23,7 +22,11 @@ export async function POST(req: NextRequest) {
 
         return NextResponse.json({
             message: "Category added successfully",
-            data: newCategory
+            data: {
+                id: newCategory.id,
+                name: newCategory.name,
+                parentId: newCategory.parentId
+            }
         }, { status: 201 })
     }
     catch (error) {

@@ -15,7 +15,14 @@ export async function PATCH(req: NextRequest) {
             }
         })
 
-        return NextResponse.json({ message: "Category updated successfully", data: updatedCategory }, { status: 200 })
+        return NextResponse.json({
+            message: "Category updated successfully",
+            data: {
+                id: updatedCategory.id,
+                name: updatedCategory.name,
+                parentId: updatedCategory.parentId
+            }
+        }, { status: 200 })
     }
     catch (error) {
         return NextResponse.json({ error: "Internal server error" }, { status: 500 })

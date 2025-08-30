@@ -7,4 +7,5 @@ export type TInputBoxProps = {
     error?: string[];
     required?: boolean;
     className?: string;
+    defaultValue?: any
 };
