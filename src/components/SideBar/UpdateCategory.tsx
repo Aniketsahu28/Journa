@@ -88,6 +88,7 @@ const UpdateCategory = ({
           }
           value={parentId}
           onChange={setParentId}
+          excludeId={categoryInfo.id}
         />
       </span>
       <span className="flex gap-3 w-full mt-2">
