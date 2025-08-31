@@ -63,7 +63,10 @@ const UpdateCategory = ({
   };
 
   return (
-    <form className="flex flex-col gap-6 w-[30vw]" onSubmit={updateCategory}>
+    <form
+      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+      onSubmit={updateCategory}
+    >
       <span className="flex flex-col gap-1">
         <h1 className="text-lg font-poppins font-medium">Update Category</h1>
         <p className="font-nunito">Enter the details to update categoy</p>

@@ -45,8 +45,9 @@ export default function DialogBox({
       onClick={onClose}
     >
       <div
-        className={`relative bg-white rounded-xl p-6 shadow-lg
-          ${animate ? "animate-fade-in-zoom" : "animate-fade-out-zoom"}`}
+        className={`relative bg-white rounded-xl p-4 sm:p-6 shadow-lg ${
+          animate ? "animate-fade-in-zoom" : "animate-fade-out-zoom"
+        }`}
         onClick={(e) => e.stopPropagation()}
       >
         <TertiaryButton

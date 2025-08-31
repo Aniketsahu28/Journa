@@ -50,7 +50,10 @@ const DeleteCategory = ({
   };
 
   return (
-    <form className="flex flex-col gap-6 w-[30vw]" onSubmit={deleteCategory}>
+    <form
+      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+      onSubmit={deleteCategory}
+    >
       <span className="flex flex-col gap-1">
         <h1 className="text-lg font-poppins font-medium">Delete Category</h1>
         <p className="font-nunito">
