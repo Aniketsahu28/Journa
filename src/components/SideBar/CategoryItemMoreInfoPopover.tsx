@@ -11,6 +11,7 @@ import DialogBox from "../utils/DialogBox";
 import { TCategoryItemProps } from "./types/TCategoryItemProps";
 import DeleteCategory from "./DeleteCategory";
 import UpdateCategory from "./UpdateCategory";
+import AddBucketItem from "@/app/category/components/AddBucketItem";
 
 const CategoryItemMoreInfoPopover = ({
   category,
@@ -22,6 +23,8 @@ const CategoryItemMoreInfoPopover = ({
     useState(false);
   const [openUpdateCategoryDialogBox, setOpenUpdateCategoryDialogBox] =
     useState(false);
+  const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] =
+    useState(false);
 
   const handleAddCategory = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -30,6 +33,14 @@ const CategoryItemMoreInfoPopover = ({
     setAddCategoryDefaultParent({ id: category.id!, name: category.name });
     setOpenPopover(false);
     setOpenAddCategoryDialogBox(true);
+  };
+  
+  const handleAddBucketItem = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    setOpenPopover(false);
+    setOpenAddBucketItemDialogBox(true);
   };
 
   const handleDeleteCategory = (
@@ -71,6 +82,17 @@ const CategoryItemMoreInfoPopover = ({
           categoryInfo={category}
         />
       </DialogBox>
+      
+      {/* Add BucketItem dialog box */}
+      <DialogBox
+        isOpen={openAddBucketItemDialogBox}
+        onClose={() => setOpenAddBucketItemDialogBox(false)}
+      >
+        <AddBucketItem
+          setOpenAddBucketItemDialogBox={setOpenAddBucketItemDialogBox}
+          categoryId={category.id!}
+        />
+      </DialogBox>
 
       <Popover open={openPopover} onOpenChange={setOpenPopover}>
         <PopoverTrigger
@@ -95,7 +117,8 @@ const CategoryItemMoreInfoPopover = ({
             <IconRenderer name="Plus" />
             <p>Add Category</p>
           </TertiaryButton>
-          <TertiaryButton className="flex gap-2 w-full p-2 rounded-md hover:bg-yellow_400">
+          <TertiaryButton className="flex gap-2 w-full p-2 rounded-md hover:bg-yellow_400" 
+          onClick={handleAddBucketItem}>
             <IconRenderer name="Plus" />
             <p>Add Bucket Item</p>
           </TertiaryButton>

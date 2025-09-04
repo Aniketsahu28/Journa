@@ -5,7 +5,12 @@ import {
   FaExclamationCircle,
 } from "react-icons/fa";
 import { MdVerifiedUser, MdAccessAlarms } from "react-icons/md";
-import { IoIosArrowDown, IoMdOptions, IoIosStarOutline } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoMdOptions,
+  IoIosStarOutline,
+  IoMdCheckmark,
+} from "react-icons/io";
 import { BsLayoutSidebarInset } from "react-icons/bs";
 import {
   IoMapOutline,
@@ -49,6 +54,7 @@ export const Icons = {
   Support: BiSupport,
   Delete: GoTrash,
   Edit: FiEdit3,
+  Tick: IoMdCheckmark,
 };
 
 export type IconName = keyof typeof Icons;

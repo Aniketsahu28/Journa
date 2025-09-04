@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
     key: "root",
     storage,
-    whitelist: ["activeCategory", "navigation"], // ✅ only persist whitelist slices
+    whitelist: ["navigation"], // ✅ only persist whitelist slices
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

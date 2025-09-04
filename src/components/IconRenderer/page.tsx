@@ -1,4 +1,4 @@
-import { TIcon } from "@/types/TIcon";
+import { TIcon } from "@/types/utils/TIcon";
 import { Icons } from "./Icons/page";
 
 const IconRenderer = ({ name, size = 22, className = "" }: TIcon) => {

@@ -4,8 +4,11 @@ export type TInputBoxProps = {
     type?: string;
     placeholder?: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
+    onKeyDown?:React.KeyboardEventHandler<HTMLInputElement>;
     error?: string[];
     required?: boolean;
     className?: string;
     defaultValue?: any
+    borderLess?:boolean
+    autoFocus?:boolean
 };

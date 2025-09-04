@@ -1,4 +1,4 @@
-import { TButtonProps } from "@/types/TButton";
+import { TButtonProps } from "@/types/utils/TButton";
 
 const TertiaryButton = ({
   children,
