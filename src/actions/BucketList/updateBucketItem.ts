@@ -35,7 +35,7 @@ export async function updateBucketItem({
             }
         })
 
-        revalidatePath(`/category/${id}`);
+        revalidatePath(`/category/${categoryId}`);
         return { success: true, data: updatedItem };
 
     } catch (error) {

@@ -81,7 +81,7 @@ const UpdateCategory = ({
       />
       <span className="flex flex-col gap-1">
         <label htmlFor="categorySelec" className="text-black font-nunito">
-          Select Parent
+          Select Parent Category
         </label>
         <CascadeSelect
           defaultValue={

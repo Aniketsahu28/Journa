@@ -17,7 +17,6 @@ const DeleteCategory = ({
   categoryInfo: { name: string; id: number };
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const rawCategory = useAppSelector((state) => state.rawCategory.rawCategory);
   const dispatch = useAppDispatch();
 
   const deleteCategory = async (event: React.FormEvent<HTMLFormElement>) => {

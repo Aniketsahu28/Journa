@@ -42,7 +42,10 @@ export default function DialogBox({
   return (
     <div
       className="fixed w-screen h-screen inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={onClose}
+      onClick={(e)=>{
+        e.stopPropagation();
+        onClose();
+      }}
     >
       <div
         className={`relative bg-white rounded-xl p-4 sm:p-6 shadow-lg ${

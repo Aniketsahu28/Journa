@@ -22,6 +22,8 @@ import {
   IoLogOutOutline,
   IoBugOutline,
   IoShieldCheckmarkOutline,
+  IoDuplicateOutline,
+  IoMove,
 } from "react-icons/io5";
 import { GoHome, GoQuestion, GoTrash } from "react-icons/go";
 import { FiPlus, FiEdit3 } from "react-icons/fi";
@@ -55,6 +57,8 @@ export const Icons = {
   Delete: GoTrash,
   Edit: FiEdit3,
   Tick: IoMdCheckmark,
+  Duplicate: IoDuplicateOutline,
+  Move: IoMove,
 };
 
 export type IconName = keyof typeof Icons;

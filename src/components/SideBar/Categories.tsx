@@ -50,7 +50,10 @@ const Categories = () => {
           <span className="flex gap-0">
             <TertiaryButton
               className={`p-1 rounded-md hover:bg-yellow_400 outline-none`}
-              onClick={() => setOpenAddCategoryDialogBox(true)}
+              onClick={() => {
+                setAddCategoryDefaultParent(null);
+                setOpenAddCategoryDialogBox(true);
+              }}
             >
               <IconRenderer name="Plus" />
             </TertiaryButton>

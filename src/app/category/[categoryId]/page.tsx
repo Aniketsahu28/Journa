@@ -22,7 +22,7 @@ export default async function categoryBucketlist(props: {
   }
 
   return (
-    <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen">
+    <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen max-h-screen overflow-y-auto">
       <CategoryBucketlistHeader categoryId={Number(categoryId)} />
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 pr-3 w-full justify-center">
         {data

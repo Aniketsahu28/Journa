@@ -45,7 +45,7 @@ export default async function RootLayout({
       >
         <SessionProviderContext>
           <StoreProvider>
-            <div className="relative flex">
+            <div className="relative flex max-h-screen overflow-hidden">
               {session && <NavigationBar />}
               <main className="flex-1 transition-all duration-300">
                 {children}

@@ -50,9 +50,20 @@ const AddTags = ({
       {tags.map((tag, index) => (
         <span
           key={index}
-          className="bg-black/8 px-2 py-1 rounded-md text-black/75"
+          className="relative bg-black/8 px-2 py-1 rounded-md text-black/75 flex items-center"
         >
           #{tag}
+          {/* Hover Cross Button for deleting tag*/}
+          <button
+            type="button"
+            onClick={() =>
+              setTags((prev) => prev.filter((_, i) => i !== index))
+            }
+            className="flex absolute inset-0 bg-black/40 text-white items-center justify-center 
+                 rounded-md opacity-0 hover:opacity-100 transition-opacity"
+          >
+            <IconRenderer name="Plus" className="rotate-45" />
+          </button>
         </span>
       ))}
 
