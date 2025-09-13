@@ -3,6 +3,7 @@ export type TInputBoxProps = {
     label?: string;
     type?: string;
     placeholder?: string;
+    value? : string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
     onKeyDown?:React.KeyboardEventHandler<HTMLInputElement>;
     error?: string[];

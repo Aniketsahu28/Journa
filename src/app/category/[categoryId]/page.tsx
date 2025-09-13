@@ -8,6 +8,7 @@ import BucketItem from "../components/BucketItem";
 
 export default async function categoryBucketlist(props: {
   params: Promise<{ categoryId: string }>;
+  searchParams?: { search?: string };
 }) {
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -15,7 +16,8 @@ export default async function categoryBucketlist(props: {
   }
 
   const { categoryId } = await props.params;
-  const { data, error } = await fetchCategoryBucketlist(Number(categoryId));
+  const search = props.searchParams?.search;
+  const { data, error } = await fetchCategoryBucketlist(Number(categoryId), search);
 
   if (error) {
     return <HotToast type="error" message="Error while fetching bucketlist" />;

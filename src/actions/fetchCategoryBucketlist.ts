@@ -2,11 +2,17 @@
 
 import prisma from "@/lib/prisma"
 
-export async function fetchCategoryBucketlist(categoryId: number) {
+export async function fetchCategoryBucketlist(categoryId: number, search?: string) {
     try {
         const categoryBucketlist = await prisma.bucketItem.findMany({
             where: {
-                categoryId
+                categoryId,
+                ...(search ? {
+                    title: {
+                        contains: search,
+                        mode: "insensitive"
+                    }
+                } : {})
             }
         })
 

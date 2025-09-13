@@ -10,6 +10,7 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
       label,
       type = "text",
       placeholder,
+      value,
       onChange,
       onKeyDown,
       error,
@@ -32,6 +33,7 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
           id={name}
           type={type}
           placeholder={placeholder}
+          value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}
           ref={ref}

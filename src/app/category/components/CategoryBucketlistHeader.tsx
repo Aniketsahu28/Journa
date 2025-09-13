@@ -10,15 +10,19 @@ import { setActiveCategory } from "@/lib/features/category/activeCategorySlice";
 import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
 import React, { useEffect, useState } from "react";
 import AddBucketItem from "./AddBucketItem";
+import { useRouter, useSearchParams } from "next/navigation";
+import useDebounce from "@/hooks/useDebounce";
 
 const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
-  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
   const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] =
     useState<boolean>(false);
+  const [searchTitle, setSearchTitle] = useState<string>("");
   const activeCategory = useAppSelector(
     (state) => state.activeCategory.activeCategory
   );
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!activeCategory) {
@@ -27,7 +31,7 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
           Number(categoryId)
         );
         if (error) {
-          setError("Error while fetching data");
+          return <HotToast type="error" message="Error while fetching data" />;
         } else {
           dispatch(
             setActiveCategory({
@@ -40,6 +44,18 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
       fetchCategoryName();
     }
   }, []);
+
+  const debounceValue = useDebounce(searchTitle);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (debounceValue && debounceValue != "") {
+      params.set("search", debounceValue);
+    } else {
+      params.delete("search");
+    }
+    router.push(`/category/${categoryId}?${params.toString()}`);
+  }, [debounceValue]);
 
   return (
     <>
@@ -54,19 +70,24 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
         />
       </DialogBox>
       <div className="flex flex-col sm:flex-row justify-between items-center">
-        {error && <HotToast type="error" message={error} />}
         <h1 className="ml-5 lg:ml-0 text-xl font-poppins font-medium">
           {activeCategory?.categoryName}
         </h1>
         <div className="flex flex-col sm:flex-row gap-3 items-center">
           <PrimaryButton
-            className="flex gap-2 items-center w-full px-4"
+            className="flex gap-2 items-center px-4"
             onClick={() => setOpenAddBucketItemDialogBox(true)}
           >
             <IconRenderer name="Plus" />
             <span>Add Item</span>
           </PrimaryButton>
-          <InputBox name="Search" placeholder="Search..." />
+          <InputBox
+            name="Search"
+            placeholder="Search by title"
+            className="w-80"
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+          />
           <TertiaryButton className="hover:bg-yellow_400 p-2.5 rounded-md">
             <IconRenderer name="Filter" />
           </TertiaryButton>
