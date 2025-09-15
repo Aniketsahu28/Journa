@@ -12,8 +12,15 @@ import React, { useEffect, useState } from "react";
 import AddBucketItem from "./AddBucketItem";
 import { useRouter, useSearchParams } from "next/navigation";
 import useDebounce from "@/hooks/useDebounce";
+import toast from "react-hot-toast";
 
-const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
+const CategoryBucketlistHeader = ({
+  categoryId,
+  error,
+}: {
+  categoryId: number;
+  error?: string;
+}) => {
   const router = useRouter();
   const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] =
     useState<boolean>(false);
@@ -24,6 +31,10 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
 
+  if (error) {
+    toast.error("Error while finding your bucketlist.");
+  }
+
   useEffect(() => {
     if (!activeCategory) {
       const fetchCategoryName = async () => {
@@ -31,7 +42,7 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
           Number(categoryId)
         );
         if (error) {
-          return <HotToast type="error" message="Error while fetching data" />;
+          toast.error("Error while fetching data");
         } else {
           dispatch(
             setActiveCategory({
@@ -93,6 +104,7 @@ const CategoryBucketlistHeader = ({ categoryId }: { categoryId: number }) => {
           </TertiaryButton>
         </div>
       </div>
+      <HotToast />
     </>
   );
 };

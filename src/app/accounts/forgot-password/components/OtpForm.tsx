@@ -7,6 +7,7 @@ import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";
 import ResendOtp from "./ResendOtp";
 import HotToast from "@/components/utils/HotToast";
+import toast from "react-hot-toast";
 
 const OtpForm = ({
   loading,
@@ -26,7 +27,7 @@ const OtpForm = ({
     setLoading(true);
     try {
       if (!otpRef.current?.getValue()) {
-        return <HotToast type="error" message="OTP is required" />;
+        toast.error("OTP is required");
       }
 
       await axiosInstance.get("/api/verify-otp", {
@@ -40,14 +41,9 @@ const OtpForm = ({
     } catch (error) {
       console.log(error);
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occured" />;
+        toast.error("An unexpected error occurred");
       }
     } finally {
       setLoading(false);
@@ -69,6 +65,7 @@ const OtpForm = ({
         </PrimaryButton>
         <ResendOtp email={email} />
       </form>
+      <HotToast />
     </div>
   );
 };

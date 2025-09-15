@@ -9,6 +9,7 @@ import { TBucketItem } from "@/types/bucketlist/TBucketItem";
 import React, { useState } from "react";
 import ViewBucketItem from "./ViewBucketItem";
 import BucketItemMoreInfo from "./BucketItemMoreInfo";
+import toast from "react-hot-toast";
 
 const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
   const [trigger, setTrigger] = useState<boolean>(false);
@@ -26,11 +27,9 @@ const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
       isComplete: !bucketItem.isComplete,
     });
     if (updatedBucketItem.success) {
-      return <HotToast type="success" message="Bucket Item udpated" />;
+      toast.success("Bucket Item udpated");
     } else {
-      return (
-        <HotToast type="error" message="Something went wrong, try again" />
-      );
+      toast.error("Something went wrong, try again");
     }
   };
 
@@ -101,6 +100,7 @@ const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
         </div>
       </div>
       <RealisticConfetti trigger={trigger} />
+      <HotToast />
     </>
   );
 };

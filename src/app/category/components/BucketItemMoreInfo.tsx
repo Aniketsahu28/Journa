@@ -16,13 +16,17 @@ import { useAppSelector } from "@/lib/utils/reduxHooks";
 import HotToast from "@/components/utils/HotToast";
 import Loader from "@/components/utils/Loader";
 import MoveBucketItem from "./MoveBucketItem";
+import toast from "react-hot-toast";
 
 const BucketItemMoreInfo = ({ bucketItem }: { bucketItem: TBucketItem }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [openPopover, setOpenPopover] = useState(false);
-  const [openDeleteBucketItemDialogBox, setOpenDeleteBucketItemDialogBox] = useState(false);
-  const [openUpdateBucketItemDialogBox, setOpenUpdateBucketItemDialogBox] = useState(false);
-  const [openMoveBucketItemDialogBox, setOpenMoveBucketItemDialogBox] = useState(false);
+  const [openDeleteBucketItemDialogBox, setOpenDeleteBucketItemDialogBox] =
+    useState(false);
+  const [openUpdateBucketItemDialogBox, setOpenUpdateBucketItemDialogBox] =
+    useState(false);
+  const [openMoveBucketItemDialogBox, setOpenMoveBucketItemDialogBox] =
+    useState(false);
   const userId = useAppSelector((state) => state.userInfo.userInfo?.id);
 
   const handleUpdateBucketItem = (
@@ -58,15 +62,10 @@ const BucketItemMoreInfo = ({ bucketItem }: { bucketItem: TBucketItem }) => {
       });
 
       if (duplicatedBucketItem.success) {
-        return <HotToast type="success" message="New bucket item add" />;
+        toast.success("New bucket item add");
       }
     } catch (error) {
-      return (
-        <HotToast
-          type="error"
-          message="Something went wront, please try again"
-        />
-      );
+      toast.error("Something went wront, please try again");
     } finally {
       setLoading(false);
       setOpenPopover(false);
@@ -106,13 +105,13 @@ const BucketItemMoreInfo = ({ bucketItem }: { bucketItem: TBucketItem }) => {
           categoryId={bucketItem.categoryId!}
         />
       </DialogBox>
-      
+
       {/* Move bucket Item dialog box */}
       <DialogBox
         isOpen={openMoveBucketItemDialogBox}
         onClose={() => setOpenMoveBucketItemDialogBox(false)}
       >
-        <MoveBucketItem 
+        <MoveBucketItem
           setOpenMoveBucketItemDialogBox={setOpenMoveBucketItemDialogBox}
           itemId={bucketItem.id}
           currentCategory={bucketItem.categoryId!}
@@ -166,6 +165,7 @@ const BucketItemMoreInfo = ({ bucketItem }: { bucketItem: TBucketItem }) => {
           </TertiaryButton>
         </PopoverContent>
       </Popover>
+      <HotToast />
     </>
   );
 };

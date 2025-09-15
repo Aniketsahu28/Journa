@@ -9,8 +9,9 @@ import HotToast from "../utils/HotToast";
 import axios from "axios";
 import Loader from "../utils/Loader";
 import { TAddCategoryDefaultParent } from "./types/TAddCategoryDefaultParent";
-import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
+import { useAppDispatch } from "@/lib/utils/reduxHooks";
 import { addRawCategory } from "@/lib/features/category/rawCategorySlice";
+import toast from "react-hot-toast";
 
 const AddCategory = ({
   setOpenAddCategoryDialogBox,
@@ -24,7 +25,6 @@ const AddCategory = ({
   const [selected, setSelected] = useState<number | null>(
     defaultParent?.id ?? null
   );
-  const rawCategory = useAppSelector((state) => state.rawCategory.rawCategory);
   const dispatch = useAppDispatch();
 
   const addCategory = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,18 +40,13 @@ const AddCategory = ({
       if (response.status == 201) {
         dispatch(addRawCategory(response.data.data));
         setOpenAddCategoryDialogBox(false);
-        return <HotToast type="success" message={response.data.message} />;
+        toast.success(response.data.message);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occured" />;
+        toast.error("An unexpected error occured");
       }
     } finally {
       setLoading(false);
@@ -59,45 +54,48 @@ const AddCategory = ({
   };
 
   return (
-    <form
-      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
-      onSubmit={addCategory}
-    >
-      <span className="flex flex-col gap-1">
-        <h1 className="text-lg font-poppins font-medium">Add New Category</h1>
-        <p className="font-nunito">Enter the details to add new categoy</p>
-      </span>
+    <>
+      <form
+        className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+        onSubmit={addCategory}
+      >
+        <span className="flex flex-col gap-1">
+          <h1 className="text-lg font-poppins font-medium">Add New Category</h1>
+          <p className="font-nunito">Enter the details to add new categoy</p>
+        </span>
 
-      <InputBox
-        name="categoryName"
-        label="Category Name"
-        placeholder="Enter category name"
-        ref={newCategoryNameRef}
-        required={true}
-      />
-
-      <span className="flex flex-col gap-1">
-        <label htmlFor="categorySelec" className="text-black font-nunito">
-          Select Parent Category
-        </label>
-        <CascadeSelect
-          defaultValue={defaultParent?.name ?? null}
-          value={selected}
-          onChange={setSelected}
+        <InputBox
+          name="categoryName"
+          label="Category Name"
+          placeholder="Enter category name"
+          ref={newCategoryNameRef}
+          required={true}
         />
-      </span>
-      <span className="flex gap-3 w-full mt-2">
-        <SecondaryButton
-          className="w-full"
-          onClick={() => setOpenAddCategoryDialogBox(false)}
-        >
-          Cancel
-        </SecondaryButton>
-        <PrimaryButton className="w-full" type="submit">
-          {loading ? <Loader className="mx-auto" /> : "Add Category"}
-        </PrimaryButton>
-      </span>
-    </form>
+
+        <span className="flex flex-col gap-1">
+          <label htmlFor="categorySelec" className="text-black font-nunito">
+            Select Parent Category
+          </label>
+          <CascadeSelect
+            defaultValue={defaultParent?.name ?? null}
+            value={selected}
+            onChange={setSelected}
+          />
+        </span>
+        <span className="flex gap-3 w-full mt-2">
+          <SecondaryButton
+            className="w-full"
+            onClick={() => setOpenAddCategoryDialogBox(false)}
+          >
+            Cancel
+          </SecondaryButton>
+          <PrimaryButton className="w-full" type="submit">
+            {loading ? <Loader className="mx-auto" /> : "Add Category"}
+          </PrimaryButton>
+        </span>
+      </form>
+      <HotToast />
+    </>
   );
 };
 

@@ -1,5 +1,4 @@
 "use client";
-
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import { DatePickerBox } from "@/components/FormElements/DatePickerBox";
 import InputBox from "@/components/FormElements/InputBox";
@@ -13,6 +12,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react";
 import z from "zod";
+import toast from "react-hot-toast";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -61,26 +61,13 @@ const SignupForm = () => {
 
         if (res.status === 201) {
           router.push("/accounts/login");
-          return (
-            <HotToast
-              type="info"
-              message="A verification email has been sent to you"
-              duration={5000}
-            />
-          );
+          toast("A verification email has been sent to you");
         }
       } catch (error) {
         if (axios.isAxiosError(error)) {
-          return (
-            <HotToast
-              type="error"
-              message={error?.response?.data?.error || "Something went wrong"}
-            />
-          );
+          toast.error(error?.response?.data?.error || "Something went wrong");
         } else {
-          return (
-            <HotToast type="error" message="An unexpected error occured" />
-          );
+          toast.error("An unexpected error occured");
         }
       }
     } else {
@@ -91,67 +78,70 @@ const SignupForm = () => {
   };
 
   return (
-    <form className="flex flex-col gap-6" onSubmit={handleSignup}>
-      <div className="flex flex-col sm:flex-row gap-6">
-        <span className="sm:w-[60%]">
+    <>
+      <form className="flex flex-col gap-6" onSubmit={handleSignup}>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <span className="sm:w-[60%]">
+            <InputBox
+              name="name"
+              label="Full Name"
+              type="text"
+              placeholder="John Doe"
+              ref={nameRef}
+              error={error?.name}
+              required
+            />
+          </span>
+          <span className="w-full sm:w-[40%]">
+            <DatePickerBox
+              name="dateOfBirth"
+              label="Date of Birth"
+              error={error?.dateOfBirth}
+              disableFutureDates={true}
+              value={dateOfBirth}
+              onChange={(date) => setDateOfBirth(date)}
+            />
+          </span>
+        </div>
+        <span>
           <InputBox
-            name="name"
-            label="Full Name"
-            type="text"
-            placeholder="John Doe"
-            ref={nameRef}
-            error={error?.name}
+            name="email"
+            label="Email"
+            type="email"
+            placeholder="johndoe@gmail.com"
+            ref={emailRef}
+            error={error?.email}
             required
           />
         </span>
-        <span className="w-full sm:w-[40%]">
-          <DatePickerBox
-            name="dateOfBirth"
-            label="Date of Birth"
-            error={error?.dateOfBirth}
-            disableFutureDates={true}
-            value={dateOfBirth}
-            onChange={(date) => setDateOfBirth(date)}
-          />
-        </span>
-      </div>
-      <span>
-        <InputBox
-          name="email"
-          label="Email"
-          type="email"
-          placeholder="johndoe@gmail.com"
-          ref={emailRef}
-          error={error?.email}
-          required
-        />
-      </span>
-      <div className="flex flex-col sm:flex-row gap-6">
-        <span className="w-full">
-          <PasswordInputBox
-            name="password"
-            label="Password"
-            placeholder="Password"
-            ref={passwordRef}
-            error={error?.password}
-            required
-          />
-        </span>
-        <span className="w-full">
-          <PasswordInputBox
-            name="confirmPassword"
-            label="Confirm Password"
-            placeholder="Confirm Password"
-            ref={confirmPasswordRef}
-            error={error?.confirmPassword}
-            required
-          />
-        </span>
-      </div>
-      <PrimaryButton type="submit" className="mt-2" disable={loading}>
-        {loading ? <Loader className="mx-auto" /> : "Sign up"}
-      </PrimaryButton>
-    </form>
+        <div className="flex flex-col sm:flex-row gap-6">
+          <span className="w-full">
+            <PasswordInputBox
+              name="password"
+              label="Password"
+              placeholder="Password"
+              ref={passwordRef}
+              error={error?.password}
+              required
+            />
+          </span>
+          <span className="w-full">
+            <PasswordInputBox
+              name="confirmPassword"
+              label="Confirm Password"
+              placeholder="Confirm Password"
+              ref={confirmPasswordRef}
+              error={error?.confirmPassword}
+              required
+            />
+          </span>
+        </div>
+        <PrimaryButton type="submit" className="mt-2" disable={loading}>
+          {loading ? <Loader className="mx-auto" /> : "Sign up"}
+        </PrimaryButton>
+      </form>
+      <HotToast />
+    </>
   );
 };
 

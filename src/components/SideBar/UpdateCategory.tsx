@@ -11,6 +11,7 @@ import axios from "axios";
 import Loader from "../utils/Loader";
 import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
 import { updateRawCategory } from "@/lib/features/category/rawCategorySlice";
+import toast from "react-hot-toast";
 
 const UpdateCategory = ({
   setOpenUpdateCategoryDialogBox,
@@ -44,18 +45,13 @@ const UpdateCategory = ({
       if (response.status == 200) {
         dispatch(updateRawCategory(response.data.data));
         setOpenUpdateCategoryDialogBox(false);
-        return <HotToast type="success" message={response.data.message} />;
+        toast.success(response.data.message);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occured" />;
+        toast.error("An unexpected error occured");
       }
     } finally {
       setLoading(false);
@@ -63,49 +59,52 @@ const UpdateCategory = ({
   };
 
   return (
-    <form
-      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
-      onSubmit={updateCategory}
-    >
-      <span className="flex flex-col gap-1">
-        <h1 className="text-lg font-poppins font-medium">Update Category</h1>
-        <p className="font-nunito">Enter the details to update categoy</p>
-      </span>
-      <InputBox
-        name="categoryName"
-        label="Category Name"
-        placeholder="Enter category name"
-        ref={updateCategoryNameRef}
-        required={true}
-        defaultValue={categoryInfo.name}
-      />
-      <span className="flex flex-col gap-1">
-        <label htmlFor="categorySelec" className="text-black font-nunito">
-          Select Parent Category
-        </label>
-        <CascadeSelect
-          defaultValue={
-            rawCategory.filter(
-              (category) => category.id === categoryInfo.parentId
-            )[0]?.name ?? null
-          }
-          value={parentId}
-          onChange={setParentId}
-          excludeId={categoryInfo.id}
+    <>
+      <form
+        className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+        onSubmit={updateCategory}
+      >
+        <span className="flex flex-col gap-1">
+          <h1 className="text-lg font-poppins font-medium">Update Category</h1>
+          <p className="font-nunito">Enter the details to update categoy</p>
+        </span>
+        <InputBox
+          name="categoryName"
+          label="Category Name"
+          placeholder="Enter category name"
+          ref={updateCategoryNameRef}
+          required={true}
+          defaultValue={categoryInfo.name}
         />
-      </span>
-      <span className="flex gap-3 w-full mt-2">
-        <SecondaryButton
-          className="w-full"
-          onClick={() => setOpenUpdateCategoryDialogBox(false)}
-        >
-          Cancel
-        </SecondaryButton>
-        <PrimaryButton className="w-full" type="submit">
-          {loading ? <Loader className="mx-auto" /> : "Update Category"}
-        </PrimaryButton>
-      </span>
-    </form>
+        <span className="flex flex-col gap-1">
+          <label htmlFor="categorySelec" className="text-black font-nunito">
+            Select Parent Category
+          </label>
+          <CascadeSelect
+            defaultValue={
+              rawCategory.filter(
+                (category) => category.id === categoryInfo.parentId
+              )[0]?.name ?? null
+            }
+            value={parentId}
+            onChange={setParentId}
+            excludeId={categoryInfo.id}
+          />
+        </span>
+        <span className="flex gap-3 w-full mt-2">
+          <SecondaryButton
+            className="w-full"
+            onClick={() => setOpenUpdateCategoryDialogBox(false)}
+          >
+            Cancel
+          </SecondaryButton>
+          <PrimaryButton className="w-full" type="submit">
+            {loading ? <Loader className="mx-auto" /> : "Update Category"}
+          </PrimaryButton>
+        </span>
+      </form>
+      <HotToast />
+    </>
   );
 };
 

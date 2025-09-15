@@ -5,6 +5,7 @@ import Loader from "@/components/utils/Loader";
 import axiosInstance from "@/lib/axios";
 import axios from "axios";
 import React, { Dispatch, SetStateAction, useRef } from "react";
+import toast from "react-hot-toast";
 
 const EmailForm = ({
   loading,
@@ -36,14 +37,9 @@ const EmailForm = ({
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occurred" />;
+        toast.error("An unexpected error occurred");
       }
     }
     setLoading(false);
@@ -67,6 +63,7 @@ const EmailForm = ({
           {loading ? <Loader className="mx-auto" /> : "Get OTP"}
         </PrimaryButton>
       </form>
+      <HotToast />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import { fetchCategoryBucketlist } from "@/actions/fetchCategoryBucketlist";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import HotToast from "@/components/utils/HotToast";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import CategoryBucketlistHeader from "../components/CategoryBucketlistHeader";
@@ -19,13 +18,9 @@ export default async function categoryBucketlist(props: {
   const search = props.searchParams?.search;
   const { data, error } = await fetchCategoryBucketlist(Number(categoryId), search);
 
-  if (error) {
-    return <HotToast type="error" message="Error while fetching bucketlist" />;
-  }
-
   return (
     <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen max-h-screen overflow-y-auto">
-      <CategoryBucketlistHeader categoryId={Number(categoryId)} />
+      <CategoryBucketlistHeader categoryId={Number(categoryId)} error={error}/>
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 pr-3 w-full justify-center">
         {data
           ?.slice()

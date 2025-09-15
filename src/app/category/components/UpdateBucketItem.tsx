@@ -10,6 +10,7 @@ import AddTags from "./AddTags";
 import HotToast from "@/components/utils/HotToast";
 import { TBucketItem } from "@/types/bucketlist/TBucketItem";
 import { updateBucketItem } from "@/actions/BucketList/updateBucketItem";
+import toast from "react-hot-toast";
 
 const UpdateBucketItem = ({
   setOpenUpdateBucketItemDialogBox,
@@ -45,69 +46,67 @@ const UpdateBucketItem = ({
 
       if (updatedBucketItem.success) {
         setOpenUpdateBucketItemDialogBox(false);
-        return <HotToast type="success" message="Bucket item updated." />;
+        toast.success("Bucket item updated");
       }
     } catch (error) {
-      return (
-        <HotToast
-          type="error"
-          message="Something went wront, please try again"
-        />
-      );
+      toast.error("Something went wront, please try again");
     }
     setLoading(false);
   };
 
   return (
-    <form
-      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
-      onSubmit={handleUpdateBucketItem}
-    >
-      <span className="flex flex-col">
-        <InputBox
-          name="title"
-          placeholder="Climb Mount Everest"
-          ref={titleRef}
-          required={true}
-          borderLess={true}
-          defaultValue={bucketItem.title}
-          className="text-xl font-medium"
-        />
-        <TextAreaBox
-          name="description"
-          placeholder="Add more details..."
-          ref={descriptionRef}
-          borderLess={true}
-          defaultValue={bucketItem.description}
-          className="outline-none"
-        />
-      </span>
-
-      <div className="flex gap-3">
-        <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
-          <IconRenderer name="Calender" />
-          Add Date
+    <>
+      <form
+        className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+        onSubmit={handleUpdateBucketItem}
+      >
+        <span className="flex flex-col">
+          <InputBox
+            name="title"
+            placeholder="Climb Mount Everest"
+            ref={titleRef}
+            required={true}
+            borderLess={true}
+            defaultValue={bucketItem.title}
+            className="text-xl font-medium"
+          />
+          <TextAreaBox
+            name="description"
+            placeholder="Add more details..."
+            ref={descriptionRef}
+            borderLess={true}
+            defaultValue={bucketItem.description}
+            className="outline-none"
+          />
         </span>
-        <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
-          <IconRenderer name="Clock" />
-          Add Reminder
+
+        <div className="flex gap-3">
+          <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
+            <IconRenderer name="Calender" />
+            Add Date
+          </span>
+          <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
+            <IconRenderer name="Clock" />
+            Add Reminder
+          </span>
+        </div>
+
+        <AddTags tags={tags} setTags={setTags} />
+
+        <span className="flex gap-3 w-full mt-2">
+          <SecondaryButton
+            className="w-full"
+            onClick={() => setOpenUpdateBucketItemDialogBox(false)}
+          >
+            Cancel
+          </SecondaryButton>
+          <PrimaryButton className="w-full" type="submit">
+            {loading ? <Loader className="mx-auto" /> : "Save Changes"}
+          </PrimaryButton>
         </span>
-      </div>
-
-      <AddTags tags={tags} setTags={setTags} />
-
-      <span className="flex gap-3 w-full mt-2">
-        <SecondaryButton
-          className="w-full"
-          onClick={() => setOpenUpdateBucketItemDialogBox(false)}
-        >
-          Cancel
-        </SecondaryButton>
-        <PrimaryButton className="w-full" type="submit">
-          {loading ? <Loader className="mx-auto" /> : "Save Changes"}
-        </PrimaryButton>
-      </span>
-    </form>
+      </form>
+      <HotToast />
+    </>
   );
 };
 

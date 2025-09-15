@@ -8,6 +8,7 @@ import HotToast from "../utils/HotToast";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
 import { deleteRawCategory } from "@/lib/features/category/rawCategorySlice";
+import toast from "react-hot-toast";
 
 const DeleteCategory = ({
   setOpenDeleteCategoryDialogBox,
@@ -30,18 +31,13 @@ const DeleteCategory = ({
       if (response.status == 200) {
         dispatch(deleteRawCategory(categoryInfo.id));
         setOpenDeleteCategoryDialogBox(false);
-        return <HotToast type="success" message={response.data.message} />;
+        toast.success(response.data.message);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occured" />;
+        toast.error("An unexpected error occured");
       }
     } finally {
       setLoading(false);
@@ -49,37 +45,40 @@ const DeleteCategory = ({
   };
 
   return (
-    <form
-      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
-      onSubmit={deleteCategory}
-    >
-      <span className="flex flex-col gap-1">
-        <h1 className="text-lg font-poppins font-medium">Delete Category</h1>
-        <p className="font-nunito">
-          You are about to delete{" "}
-          <b className="text-red">{categoryInfo.name}</b>. <br />
-          <br />
-          Note: All bucket items in this category will also be deleted. Move
-          them first if you wish to keep them.
-        </p>
-      </span>
+    <>
+      <form
+        className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+        onSubmit={deleteCategory}
+      >
+        <span className="flex flex-col gap-1">
+          <h1 className="text-lg font-poppins font-medium">Delete Category</h1>
+          <p className="font-nunito">
+            You are about to delete{" "}
+            <b className="text-red">{categoryInfo.name}</b>. <br />
+            <br />
+            Note: All bucket items in this category will also be deleted. Move
+            them first if you wish to keep them.
+          </p>
+        </span>
 
-      <span className="flex gap-3 w-full mt-2">
-        <SecondaryButton
-          className="w-full"
-          onClick={() => setOpenDeleteCategoryDialogBox(false)}
-        >
-          Cancel
-        </SecondaryButton>
-        <PrimaryButton
-          className="w-full text-white"
-          type="submit"
-          style={{ background: "red" }}
-        >
-          {loading ? <Loader className="mx-auto" /> : "Delete Category"}
-        </PrimaryButton>
-      </span>
-    </form>
+        <span className="flex gap-3 w-full mt-2">
+          <SecondaryButton
+            className="w-full"
+            onClick={() => setOpenDeleteCategoryDialogBox(false)}
+          >
+            Cancel
+          </SecondaryButton>
+          <PrimaryButton
+            className="w-full text-white"
+            type="submit"
+            style={{ background: "red" }}
+          >
+            {loading ? <Loader className="mx-auto" /> : "Delete Category"}
+          </PrimaryButton>
+        </span>
+      </form>
+      <HotToast />
+    </>
   );
 };
 

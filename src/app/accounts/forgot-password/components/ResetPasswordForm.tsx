@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import z from "zod";
 import HotToast from "@/components/utils/HotToast";
+import toast from "react-hot-toast";
 
 const ResetPasswordForm = ({
   loading,
@@ -44,12 +45,7 @@ const ResetPasswordForm = ({
         });
 
         if (resposne.status == 200) {
-          return (
-            <HotToast
-              type="success"
-              message="Your password has been reset successfully"
-            />
-          );
+          toast.success("Your password has been reset successfully");
           router.push("/accounts/login");
         }
       } else {
@@ -59,14 +55,9 @@ const ResetPasswordForm = ({
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        return (
-          <HotToast
-            type="error"
-            message={error?.response?.data?.error || "Something went wrong"}
-          />
-        );
+        toast.error(error?.response?.data?.error || "Something went wrong");
       } else {
-        return <HotToast type="error" message="An unexpected error occured" />;
+        toast.error("An unexpected error occurred");
       }
     } finally {
       setLoading(false);
@@ -99,6 +90,7 @@ const ResetPasswordForm = ({
           {loading ? <Loader className="mx-auto" /> : "Submit"}
         </PrimaryButton>
       </form>
+      <HotToast />
     </div>
   );
 };
