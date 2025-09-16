@@ -16,6 +16,7 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
       defaultValue,
       borderLess,
       maxRows = 5,
+      minRows = 0, // ✅ added default
     },
     ref
   ) => {
@@ -27,8 +28,13 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
         window.getComputedStyle(el).lineHeight || "20",
         10
       );
+
+      const minHeight = lineHeight * minRows;
       const maxHeight = lineHeight * maxRows;
-      el.style.height = `${Math.min(el.scrollHeight, maxHeight)}px`;
+
+      const newHeight = Math.min(Math.max(el.scrollHeight, minHeight), maxHeight);
+
+      el.style.height = `${newHeight}px`;
       el.style.overflowY = el.scrollHeight > maxHeight ? "auto" : "hidden";
     };
 
@@ -42,7 +48,7 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
       if (textAreaRef.current) {
         adjustHeight(textAreaRef.current);
       }
-    }, [defaultValue, maxRows]);
+    }, [defaultValue, maxRows, minRows]);
 
     return (
       <div className="flex flex-col gap-1 w-full">
@@ -64,7 +70,7 @@ const TextAreaBox = forwardRef<HTMLTextAreaElement, TTextAreaProps>(
           onChange={handleInput}
           required={required}
           defaultValue={defaultValue}
-          rows={1}
+          rows={minRows || 1} // ✅ respects minRows
           className={`resize-none font-nunito rounded-md transition ${
             borderLess
               ? "outline-none py-1"

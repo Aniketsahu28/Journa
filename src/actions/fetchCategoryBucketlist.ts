@@ -13,7 +13,11 @@ export async function fetchCategoryBucketlist(categoryId: number, search?: strin
                         mode: "insensitive"
                     }
                 } : {})
-            }
+            },
+            orderBy: [
+                {isComplete: "asc"},
+                {createdAt: "desc"},
+            ]
         })
 
         return { data: categoryBucketlist }

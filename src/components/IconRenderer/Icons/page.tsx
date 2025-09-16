@@ -24,6 +24,9 @@ import {
   IoShieldCheckmarkOutline,
   IoDuplicateOutline,
   IoMove,
+  IoMailOutline,
+  IoLogoInstagram,
+  IoLogoLinkedin,
 } from "react-icons/io5";
 import { GoHome, GoQuestion, GoTrash } from "react-icons/go";
 import { FiPlus, FiEdit3 } from "react-icons/fi";
@@ -40,6 +43,7 @@ export const Icons = {
   SideBar: BsLayoutSidebarInset,
   Search: IoSearchOutline,
   Mail: IoMailUnreadOutline,
+  ContactMail: IoMailOutline,
   Home: GoHome,
   Map: IoMapOutline,
   Check: IoCheckboxOutline,
@@ -59,6 +63,8 @@ export const Icons = {
   Tick: IoMdCheckmark,
   Duplicate: IoDuplicateOutline,
   Move: IoMove,
+  Instagram: IoLogoInstagram,
+  Linkedin: IoLogoLinkedin,
 };
 
 export type IconName = keyof typeof Icons;

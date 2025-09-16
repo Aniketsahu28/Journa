@@ -10,5 +10,6 @@ export type TTextAreaProps = {
   defaultValue?: any;
   borderLess?: boolean;
   maxRows?: number;
+  minRows?: number;
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 };

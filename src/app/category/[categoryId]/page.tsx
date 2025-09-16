@@ -22,14 +22,7 @@ export default async function categoryBucketlist(props: {
     <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen max-h-screen overflow-y-auto">
       <CategoryBucketlistHeader categoryId={Number(categoryId)} error={error}/>
       <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 pr-3 w-full justify-center">
-        {data
-          ?.slice()
-          .sort(
-            (a, b) =>
-              Number(a.isComplete) - Number(b.isComplete) ||
-              a.title.localeCompare(b.title)
-          )
-          .map((bucketItem) => (
+        {data?.map((bucketItem) => (
             <BucketItem key={bucketItem.id} bucketItem={bucketItem} />
           ))}
       </div>
