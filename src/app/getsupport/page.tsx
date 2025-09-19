@@ -1,5 +1,5 @@
 "use client";
-import { addSupportQuery } from "@/actions/addSupportQuery";
+import { addSupportQuery } from "@/actions/SupportAndFeedback/addSupportQuery";
 import PrimaryButton from "@/components/Buttons/PrimaryButton";
 import TextAreaBox from "@/components/FormElements/TextAreaBox";
 import IconRenderer from "@/components/IconRenderer/page";

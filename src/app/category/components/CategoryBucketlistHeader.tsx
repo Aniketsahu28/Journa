@@ -84,7 +84,7 @@ const CategoryBucketlistHeader = ({
         <h1 className="ml-5 lg:ml-0 text-xl font-poppins font-medium">
           {activeCategory?.categoryName}
         </h1>
-        <div className="flex flex-col sm:flex-row gap-3 items-center">
+        <div className="flex flex-col sm:flex-row gap-3 mr-3 items-center">
           <PrimaryButton
             className="flex gap-2 items-center px-4"
             onClick={() => setOpenAddBucketItemDialogBox(true)}
@@ -99,9 +99,9 @@ const CategoryBucketlistHeader = ({
             value={searchTitle}
             onChange={(e) => setSearchTitle(e.target.value)}
           />
-          <TertiaryButton className="hover:bg-yellow_400 p-2.5 rounded-md">
+          {/* <TertiaryButton className="hover:bg-yellow_400 p-2.5 rounded-md">
             <IconRenderer name="Filter" />
-          </TertiaryButton>
+          </TertiaryButton> */}
         </div>
       </div>
       <HotToast />
