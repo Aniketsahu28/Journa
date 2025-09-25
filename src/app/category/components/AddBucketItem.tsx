@@ -11,6 +11,12 @@ import { useAppSelector } from "@/lib/utils/reduxHooks";
 import { addBucketItem } from "@/actions/BucketList/addBucketItem";
 import HotToast from "@/components/utils/HotToast";
 import toast from "react-hot-toast";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 const AddBucketItem = ({
   setOpenAddBucketItemDialogBox,
@@ -20,6 +26,7 @@ const AddBucketItem = ({
   categoryId: number;
 }) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [datePopover, setDatePopover] = useState<boolean>(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const [tags, setTags] = useState<string[]>([]);
@@ -82,14 +89,32 @@ const AddBucketItem = ({
         </span>
 
         <div className="flex gap-3">
-          <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
-            <IconRenderer name="Calender" />
-            Add Date
-          </span>
-          <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
+          <Popover open={datePopover} onOpenChange={setDatePopover}>
+            <PopoverTrigger asChild>
+              <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px] cursor-pointer">
+                <IconRenderer name="Calender" />
+                {date ? `${date?.toLocaleDateString()}` : "Add Date"}
+              </span>
+            </PopoverTrigger>
+            <PopoverContent
+              align="end"
+              className="w-auto p-0 bg-white border border-black/25 rounded-md shadow-md"
+            >
+              <Calendar
+                mode="single"
+                selected={date ?? undefined}
+                captionLayout="dropdown"
+                onSelect={(date) => {
+                  setDate(date ?? undefined);
+                  setDatePopover(false);
+                }}
+              />
+            </PopoverContent>
+          </Popover>
+          {/* <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
             <IconRenderer name="Clock" />
             Add Reminder
-          </span>
+          </span> */}
         </div>
 
         <AddTags tags={tags} setTags={setTags} />
@@ -102,7 +127,7 @@ const AddBucketItem = ({
             Cancel
           </SecondaryButton>
           <PrimaryButton className="w-full" type="submit">
-            {loading ? <Loader className="mx-auto" /> : "Add Bucket Item"}
+            {loading ? <Loader className="mx-auto" /> : "Add Item"}
           </PrimaryButton>
         </span>
       </form>

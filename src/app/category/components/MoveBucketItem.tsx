@@ -60,11 +60,7 @@ const MoveBucketItem = ({
           >
             Cancel
           </SecondaryButton>
-          <PrimaryButton
-            className="w-full text-white"
-            type="submit"
-            style={{ background: "red" }}
-          >
+          <PrimaryButton className="w-full" type="submit">
             {loading ? <Loader className="mx-auto" /> : "Move Item"}
           </PrimaryButton>
         </span>

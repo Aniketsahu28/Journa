@@ -48,7 +48,7 @@ const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
       </DialogBox>
 
       <div
-        className="bg-white p-3 rounded-lg border hover:border-black/50 border-black/20 flex flex-1 gap-4 items-start min-w-[350px] max-w-[420px] cursor-pointer relative group"
+        className="bg-white p-3 rounded-lg border hover:border-black/50 border-black/20 flex flex-1 gap-4 items-start w-full sm:min-w-[350px] sm:max-w-[420px] cursor-pointer relative group"
         onClick={() => setViewBucketItemDialogBox(true)}
       >
         <Checkbox
@@ -65,22 +65,20 @@ const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
             <BucketItemMoreInfo bucketItem={bucketItem} />
           </span>
           <div className="flex gap-3">
-            <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
-              <IconRenderer name="Calender" />
-              {bucketItem.date ? (
-                <p>{JSON.stringify(bucketItem.date)}</p>
-              ) : (
-                "Add Date"
-              )}
-            </span>
-            <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
+            {bucketItem.date && (
+              <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
+                <IconRenderer name="Calender" />
+                {bucketItem.date && <p>{`${bucketItem.date.toLocaleDateString()}`}</p>}
+              </span>
+            )}
+            {/* <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
               <IconRenderer name="Clock" />
               {bucketItem.reminder ? (
                 <p>{JSON.stringify(bucketItem.reminder)}</p>
               ) : (
                 "Add Reminder"
               )}
-            </span>
+            </span> */}
           </div>
           <div className="flex flex-col gap-3 mt-auto">
             {bucketItem.tags.length > 0 && (

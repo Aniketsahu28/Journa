@@ -14,7 +14,6 @@ import {
 import { BsLayoutSidebarInset } from "react-icons/bs";
 import {
   IoMapOutline,
-  IoCheckboxOutline,
   IoMailUnreadOutline,
   IoSearchOutline,
   IoCalendarClearOutline,
@@ -27,6 +26,7 @@ import {
   IoMailOutline,
   IoLogoInstagram,
   IoLogoLinkedin,
+  IoCheckmarkCircleOutline,
 } from "react-icons/io5";
 import { GoHome, GoQuestion, GoTrash } from "react-icons/go";
 import { FiPlus, FiEdit3 } from "react-icons/fi";
@@ -46,7 +46,7 @@ export const Icons = {
   ContactMail: IoMailOutline,
   Home: GoHome,
   Map: IoMapOutline,
-  Check: IoCheckboxOutline,
+  Check: IoCheckmarkCircleOutline,
   Plus: FiPlus,
   MoreInfo: BiDotsHorizontalRounded,
   Question: GoQuestion,

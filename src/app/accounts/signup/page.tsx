@@ -9,13 +9,13 @@ import JournaLogo from "@/components/utils/JournaLogo";
 
 const Signup = () => {
   return (
-    <div className="flex py-6 sm:py-0 sm:h-[100vh] w-full bg-white">
+    <div className="flex py-0 h-[100vh] w-full bg-white">
       <Image
         src={signupBackground}
         alt="Flight"
         className="w-[55%] object-cover hidden lg:block"
       />
-      <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start 3xl:items-center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20 overflow-y-auto">
+      <div className="w-full lg:w-[45%] flex items-start sm:items-center lg:items-start 3xl:items-center justify-center p-4 sm:p-20 lg:p-10 2xl:px-20  overflow-y-auto">
         <div className="flex flex-col gap-8 w-full">
           <JournaLogo />
           <span className="flex flex-col gap-1">

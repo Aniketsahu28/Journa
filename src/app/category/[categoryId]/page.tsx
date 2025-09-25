@@ -7,7 +7,7 @@ import BucketItem from "../components/BucketItem";
 
 export default async function categoryBucketlist(props: {
   params: Promise<{ categoryId: string }>;
-  searchParams?: { search?: string };
+  searchParams?: Promise<{ search?: string }>;
 }) {
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -15,13 +15,13 @@ export default async function categoryBucketlist(props: {
   }
 
   const { categoryId } = await props.params;
-  const search = props.searchParams?.search;
-  const { data, error } = await fetchCategoryBucketlist(Number(categoryId), search);
+  const searchParams = await props.searchParams;
+  const { data, error } = await fetchCategoryBucketlist(Number(categoryId), searchParams?.search);
 
   return (
-    <div className="p-3 pt-2 pl-6 flex flex-col gap-14 min-h-screen max-h-screen overflow-y-auto">
+    <div className="p-3 pt-2 sm:pl-6 flex flex-col gap-10 sm:gap-14 min-h-screen max-h-screen overflow-y-auto">
       <CategoryBucketlistHeader categoryId={Number(categoryId)} error={error}/>
-      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 pr-3 w-full justify-center">
+      <div className="flex flex-col sm:flex-row sm:flex-wrap gap-8 sm:pr-3 w-full justify-center">
         {data?.map((bucketItem) => (
             <BucketItem key={bucketItem.id} bucketItem={bucketItem} />
           ))}

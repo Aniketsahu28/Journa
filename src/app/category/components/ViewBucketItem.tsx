@@ -49,19 +49,25 @@ const ViewBucketItem = ({
       <div className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]">
         <span className="flex flex-col gap-3">
           <h2 className="text-xl font-nunito font-medium">{itemInfo.title}</h2>
-          <p className="font-nunito">{itemInfo.description}</p>
+          {itemInfo.description && (
+            <p className="font-nunito">{itemInfo.description}</p>
+          )}
         </span>
 
-        <div className="flex gap-3">
-          <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
-            <IconRenderer name="Calender" />
-            {itemInfo.date ? itemInfo.date?.toString() : "Add Date"}
-          </span>
-          <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
+        {(itemInfo.date || itemInfo.reminder) && (
+          <div className="flex gap-3">
+            {itemInfo.date && (
+              <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px]">
+                <IconRenderer name="Calender" />
+                {itemInfo.date?.toLocaleDateString()}
+              </span>
+            )}
+            {/* <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
             <IconRenderer name="Clock" />
             {itemInfo.reminder ? itemInfo.reminder?.toString() : "Add Reminder"}
-          </span>
-        </div>
+          </span> */}
+          </div>
+        )}
 
         <div className="flex gap-3 items-center flex-wrap">
           {itemInfo.tags.map((tag, index) => (

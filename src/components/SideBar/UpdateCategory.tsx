@@ -99,7 +99,7 @@ const UpdateCategory = ({
             Cancel
           </SecondaryButton>
           <PrimaryButton className="w-full" type="submit">
-            {loading ? <Loader className="mx-auto" /> : "Update Category"}
+            {loading ? <Loader className="mx-auto" /> : "Save Changes"}
           </PrimaryButton>
         </span>
       </form>

@@ -80,11 +80,20 @@ const CategoryBucketlistHeader = ({
           categoryId={categoryId}
         />
       </DialogBox>
-      <div className="flex flex-col sm:flex-row justify-between items-center">
-        <h1 className="ml-5 lg:ml-0 text-xl font-poppins font-medium">
+
+      {/* Add BucketItem button */}
+      <PrimaryButton
+        className="fixed sm:hidden z-50 px-2 bottom-3 right-3"
+        onClick={() => setOpenAddBucketItemDialogBox(true)}
+      >
+        <IconRenderer name="Plus" />
+      </PrimaryButton>
+
+      <div className="flex flex-row justify-between items-center">
+        <h1 className="ml-8 mt-[5px] sm:ml-5 lg:ml-0 text-xl font-poppins font-medium">
           {activeCategory?.categoryName}
         </h1>
-        <div className="flex flex-col sm:flex-row gap-3 mr-3 items-center">
+        <div className="hidden sm:flex flex-row gap-3 mr-3 items-center">
           <PrimaryButton
             className="flex gap-2 items-center px-4"
             onClick={() => setOpenAddBucketItemDialogBox(true)}
@@ -95,7 +104,7 @@ const CategoryBucketlistHeader = ({
           <InputBox
             name="Search"
             placeholder="Search by title"
-            className="w-80"
+            className="w-60 lg:w-80"
             value={searchTitle}
             onChange={(e) => setSearchTitle(e.target.value)}
           />
