@@ -65,7 +65,7 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id
         token.name = user.name
@@ -74,6 +74,20 @@ export const authOptions: AuthOptions = {
         token.dateOfBirth = user.dateOfBirth
         token.country = user.country
       };
+
+      if (trigger === 'update' && session) {
+        const dbUser = await prisma.user.findUnique({
+          where: {
+            id: Number(token.id)
+          }
+        })
+
+        if (dbUser) {
+          token.name = dbUser.name
+          token.dateOfBirth = dbUser.dateOfBirth
+        }
+      }
+
       return token;
     },
     async session({ session, token }) {

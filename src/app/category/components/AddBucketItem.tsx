@@ -9,7 +9,6 @@ import React, { useEffect, useRef, useState } from "react";
 import AddTags from "./AddTags";
 import { useAppSelector } from "@/lib/utils/reduxHooks";
 import { addBucketItem } from "@/actions/BucketList/addBucketItem";
-import HotToast from "@/components/utils/HotToast";
 import toast from "react-hot-toast";
 import {
   Popover,
@@ -59,80 +58,77 @@ const AddBucketItem = ({
         toast.success("New bucket item add");
       }
     } catch (error) {
-      toast.error("Something went wront, please try again");
+      toast.error("Something went wrong, please try again");
     }
     setLoading(false);
   };
 
   return (
-    <>
-      <form
-        className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
-        onSubmit={handleAddBucketItem}
-      >
-        <span className="flex flex-col">
-          <InputBox
-            name="title"
-            placeholder="Climb Mount Everest"
-            ref={titleRef}
-            required={true}
-            borderLess={true}
-            className="text-xl font-medium"
-          />
-          <TextAreaBox
-            name="description"
-            placeholder="Add more details..."
-            ref={descriptionRef}
-            borderLess={true}
-            className="outline-none"
-          />
-        </span>
+    <form
+      className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
+      onSubmit={handleAddBucketItem}
+    >
+      <span className="flex flex-col">
+        <InputBox
+          name="title"
+          placeholder="Climb Mount Everest"
+          ref={titleRef}
+          required={true}
+          borderLess={true}
+          className="text-xl font-medium"
+        />
+        <TextAreaBox
+          name="description"
+          placeholder="Add more details..."
+          ref={descriptionRef}
+          borderLess={true}
+          className="outline-none"
+        />
+      </span>
 
-        <div className="flex gap-3">
-          <Popover open={datePopover} onOpenChange={setDatePopover}>
-            <PopoverTrigger asChild>
-              <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px] cursor-pointer">
-                <IconRenderer name="Calender" />
-                {date ? `${date?.toLocaleDateString()}` : "Add Date"}
-              </span>
-            </PopoverTrigger>
-            <PopoverContent
-              align="end"
-              className="w-auto p-0 bg-white border border-black/25 rounded-md shadow-md"
-            >
-              <Calendar
-                mode="single"
-                selected={date ?? undefined}
-                captionLayout="dropdown"
-                onSelect={(date) => {
-                  setDate(date ?? undefined);
-                  setDatePopover(false);
-                }}
-              />
-            </PopoverContent>
-          </Popover>
-          {/* <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
+      <div className="flex gap-3">
+        <Popover open={datePopover} onOpenChange={setDatePopover}>
+          <PopoverTrigger asChild>
+            <span className="flex gap-2 items-center border-[1.5px] border-yellow_100 rounded-md p-[5px] cursor-pointer">
+              <IconRenderer name="Calender" />
+              {date ? `${date?.toLocaleDateString()}` : "Add Date"}
+            </span>
+          </PopoverTrigger>
+          <PopoverContent
+            align="end"
+            className="w-auto p-0 bg-white border border-black/25 rounded-md shadow-md"
+          >
+            <Calendar
+              mode="single"
+              selected={date ?? undefined}
+              captionLayout="dropdown"
+              onSelect={(date) => {
+                setDate(date ?? undefined);
+                setDatePopover(false);
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+        {/* <span className="flex gap-2 items-center border-[1.5px] border-red rounded-md p-[5px]">
             <IconRenderer name="Clock" />
             Add Reminder
           </span> */}
-        </div>
+      </div>
 
-        <AddTags tags={tags} setTags={setTags} />
+      <AddTags tags={tags} setTags={setTags} />
 
-        <span className="flex gap-3 w-full mt-2">
-          <SecondaryButton
-            className="w-full"
-            onClick={() => setOpenAddBucketItemDialogBox(false)}
-          >
-            Cancel
-          </SecondaryButton>
-          <PrimaryButton className="w-full" type="submit">
-            {loading ? <Loader className="mx-auto" /> : "Add Item"}
-          </PrimaryButton>
-        </span>
-      </form>
-      <HotToast />
-    </>
+      <span className="flex gap-3 w-full mt-2">
+        <SecondaryButton
+          className="w-full"
+          onClick={() => setOpenAddBucketItemDialogBox(false)}
+        >
+          Cancel
+        </SecondaryButton>
+        <PrimaryButton className="w-full" type="submit">
+          {loading ? <Loader className="mx-auto" /> : "Add Item"}
+        </PrimaryButton>
+      </span>
+    </form>
   );
 };
 

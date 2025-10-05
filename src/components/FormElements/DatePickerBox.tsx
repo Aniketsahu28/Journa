@@ -47,7 +47,7 @@ export function DatePickerBox({
               error && error?.length > 0 ? "border-red" : "border-black/25"
             } ${className}`}
           >
-            <span>{value ? value.toLocaleDateString() : "dd-mm-yyyy"}</span>
+            <span>{value ? new Date(value).toLocaleDateString() : "dd-mm-yyyy"}</span>
             <IoCalendarClearOutline className="text-black/75" size={22} />
           </div>
         </PopoverTrigger>

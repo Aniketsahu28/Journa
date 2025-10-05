@@ -13,8 +13,7 @@ import toast from "react-hot-toast";
 
 const BucketItem = ({ bucketItem }: { bucketItem: TBucketItem }) => {
   const [trigger, setTrigger] = useState<boolean>(false);
-  const [ViewBucketItemDialogBox, setViewBucketItemDialogBox] =
-    useState<boolean>(false);
+  const [ViewBucketItemDialogBox, setViewBucketItemDialogBox] = useState<boolean>(false);
 
   const handleComplete = async () => {
     if (!bucketItem.isComplete) {

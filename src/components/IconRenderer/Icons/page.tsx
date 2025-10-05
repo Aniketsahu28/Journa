@@ -28,9 +28,10 @@ import {
   IoLogoLinkedin,
   IoCheckmarkCircleOutline,
 } from "react-icons/io5";
-import { GoHome, GoQuestion, GoTrash } from "react-icons/go";
+import { GoHome, GoQuestion, GoTrash, GoLock } from "react-icons/go";
 import { FiPlus, FiEdit3 } from "react-icons/fi";
 import { BiDotsHorizontalRounded, BiSupport } from "react-icons/bi";
+import { VscAccount } from "react-icons/vsc";
 
 export const Icons = {
   google: FaGoogle,
@@ -65,6 +66,8 @@ export const Icons = {
   Move: IoMove,
   Instagram: IoLogoInstagram,
   Linkedin: IoLogoLinkedin,
+  Profile: VscAccount,
+  Lock: GoLock,
 };
 
 export type IconName = keyof typeof Icons;

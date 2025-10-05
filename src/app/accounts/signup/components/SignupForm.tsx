@@ -56,7 +56,7 @@ const SignupForm = () => {
           name: result.data.name,
           email: result.data.email,
           password: result.data.password,
-          dateOfBirth: result.data.dateOfBirth,
+          dateOfBirth: dateOfBirth,
         });
 
         if (res.status === 201) {

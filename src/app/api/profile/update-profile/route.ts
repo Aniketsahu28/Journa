@@ -22,7 +22,7 @@ export async function PATCH(req: NextRequest) {
                 },
                 data: {
                     name: result.data.name,
-                    dateOfBirth: result.data.dateOfBirth,
+                    dateOfBirth: dateOfBirth,
                     country: result.data.country,
                     image: result.data.image
                 }

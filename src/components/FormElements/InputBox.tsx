@@ -18,7 +18,8 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
       className = "",
       defaultValue,
       borderLess,
-      autoFocus
+      autoFocus,
+      disabled = false,
     },
     ref
   ) => {
@@ -40,8 +41,17 @@ const InputBox = forwardRef<HTMLInputElement, TInputBoxProps>(
           required={required}
           defaultValue={defaultValue}
           autoFocus={autoFocus}
-          className={`font-nunito rounded-md transition ${borderLess ? "outline-none":"border px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"} ${
-            error && error?.length > 0 ? "border-red" : !borderLess && "border-black/25"
+          disabled={disabled}
+          className={`font-nunito rounded-md transition ${
+            disabled && "cursor-not-allowed"
+          } ${
+            borderLess
+              ? "outline-none"
+              : "border px-3 py-2 focus:outline-none focus:ring-1 focus:ring-black"
+          } ${
+            error && error?.length > 0
+              ? "border-red"
+              : !borderLess && "border-black/25"
           } ${className}`}
         />
         {error && <p className="text-sm text-red font-poppins">{error}</p>}

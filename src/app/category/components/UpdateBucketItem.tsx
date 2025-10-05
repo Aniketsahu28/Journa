@@ -7,7 +7,6 @@ import IconRenderer from "@/components/IconRenderer/page";
 import Loader from "@/components/utils/Loader";
 import React, { useRef, useState } from "react";
 import AddTags from "./AddTags";
-import HotToast from "@/components/utils/HotToast";
 import { TBucketItem } from "@/types/bucketlist/TBucketItem";
 import { updateBucketItem } from "@/actions/BucketList/updateBucketItem";
 import toast from "react-hot-toast";
@@ -62,7 +61,6 @@ const UpdateBucketItem = ({
   };
 
   return (
-    <>
       <form
         className="flex flex-col gap-6 w-[85vw] sm:w-[60vw] lg:w-[30vw]"
         onSubmit={handleUpdateBucketItem}
@@ -130,8 +128,6 @@ const UpdateBucketItem = ({
           </PrimaryButton>
         </span>
       </form>
-      <HotToast />
-    </>
   );
 };
 

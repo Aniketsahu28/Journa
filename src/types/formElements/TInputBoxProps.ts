@@ -3,13 +3,14 @@ export type TInputBoxProps = {
     label?: string;
     type?: string;
     placeholder?: string;
-    value? : string;
+    value?: string;
     onChange?: React.ChangeEventHandler<HTMLInputElement>;
-    onKeyDown?:React.KeyboardEventHandler<HTMLInputElement>;
+    onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
     error?: string[];
     required?: boolean;
     className?: string;
     defaultValue?: any
-    borderLess?:boolean
-    autoFocus?:boolean
+    borderLess?: boolean
+    autoFocus?: boolean
+    disabled?: boolean
 };
