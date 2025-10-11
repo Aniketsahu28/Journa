@@ -11,41 +11,43 @@ import {
   setNavigationOpen,
   setNavigationWidth,
 } from "@/lib/features/navigation/navigationSlice";
+import { useSession } from "next-auth/react";
 
 const NavigationBar = () => {
+  const {data:sessin, status} = useSession();
   const selector = useAppSelector((state) => state.navigation);
   const dispatch = useAppDispatch();
   const [liveWidth, setLiveWidth] = useState<number>(selector.width);
   const isResizing = useRef(false);
-
+  
   const handleStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.preventDefault();
     isResizing.current = true;
   };
-
+  
   useEffect(() => {
     const handleMove = (e: MouseEvent | TouchEvent) => {
       if (!isResizing.current) return;
       const clientX =
-        (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX;
+      (e as MouseEvent).clientX || (e as TouchEvent).touches?.[0]?.clientX;
       if (!clientX) return;
-
+      
       const newWidth = Math.max(288, Math.min(clientX, 500));
       setLiveWidth(newWidth);
     };
-
+    
     const handleEnd = () => {
       if (isResizing.current) {
         isResizing.current = false;
         dispatch(setNavigationWidth(liveWidth));
       }
     };
-
+    
     window.addEventListener("mousemove", handleMove);
     window.addEventListener("mouseup", handleEnd);
     window.addEventListener("touchmove", handleMove);
     window.addEventListener("touchend", handleEnd);
-
+    
     return () => {
       window.removeEventListener("mousemove", handleMove);
       window.removeEventListener("mouseup", handleEnd);
@@ -53,7 +55,11 @@ const NavigationBar = () => {
       window.removeEventListener("touchend", handleEnd);
     };
   }, [liveWidth, dispatch]);
-
+  
+  if(!sessin){
+    return null;
+  }
+  
   return (
     <div className="fixed lg:relative z-40">
       {/* NavigationBar */}
@@ -62,7 +68,7 @@ const NavigationBar = () => {
         style={{
           width: selector.open ? liveWidth : 0,
           transform: selector.open
-            ? "translateX(0)"
+          ? "translateX(0)"
             : `translateX(-${selector.width}px)`,
           transition: isResizing.current
             ? "none"

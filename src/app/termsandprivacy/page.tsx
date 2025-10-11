@@ -89,9 +89,9 @@ const TermsAndPrivacy = () => {
             <li>
               <strong>Personal Data:</strong> Name, email, login credentials.
             </li>
-            <li>
+            {/* <li>
               <strong>Usage Data:</strong> Pages visited, features used.
-            </li>
+            </li> */}
             <li>
               <strong>Device Data:</strong> Browser, IP address, cookies.
             </li>

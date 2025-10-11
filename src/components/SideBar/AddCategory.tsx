@@ -37,9 +37,9 @@ const AddCategory = ({
       });
 
       if (response.status == 201) {
+        toast.success(response.data.message);
         dispatch(addRawCategory(response.data.data));
         setOpenAddCategoryDialogBox(false);
-        toast.success(response.data.message);
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {

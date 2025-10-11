@@ -10,8 +10,10 @@ import AddCategory from "./AddCategory";
 import { TAddCategoryDefaultParent } from "./types/TAddCategoryDefaultParent";
 import { setRawCategory } from "@/lib/features/category/rawCategorySlice";
 import { buildCategoryTree } from "./utils/buildCategoryTree";
+import Loader from "../utils/Loader";
 
 const Categories = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [openAddCategoryDialogBox, setOpenAddCategoryDialogBox] =
     useState<boolean>(false);
   const [openCategories, setOpenCategories] = useState(true);
@@ -22,8 +24,10 @@ const Categories = () => {
 
   useEffect(() => {
     const fetchUserCategories = async () => {
+      setLoading(true);
       const response = await axiosInstance.get("/api/category");
       dispatch(setRawCategory(response.data.data));
+      setLoading(false);
     };
 
     fetchUserCategories();
@@ -74,20 +78,27 @@ const Categories = () => {
             </TertiaryButton>
           </span>
         </span>
-        <div
-          className={`flex flex-col transition-all duration-100 ease-in-out ${
-            openCategories ? "opacity-100" : "max-h-0 opacity-0"
-          }`}
-        >
-          {categoryTree.map((category) => (
-            <CategoryItem
-              key={category.id}
-              category={category}
-              setOpenAddCategoryDialogBox={setOpenAddCategoryDialogBox}
-              setAddCategoryDefaultParent={setAddCategoryDefaultParent}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <span className="flex gap-3 items-center">
+          <Loader />
+          <p>Loding categories...</p>
+          </span>
+        ) : (
+          <div
+            className={`flex flex-col transition-all duration-100 ease-in-out ${
+              openCategories ? "opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            {categoryTree.map((category) => (
+              <CategoryItem
+                key={category.id}
+                category={category}
+                setOpenAddCategoryDialogBox={setOpenAddCategoryDialogBox}
+                setAddCategoryDefaultParent={setAddCategoryDefaultParent}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

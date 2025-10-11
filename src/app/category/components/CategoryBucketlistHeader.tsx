@@ -22,17 +22,28 @@ const CategoryBucketlistHeader = ({
   error?: string;
 }) => {
   const router = useRouter();
-  const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] = useState<boolean>(false);
+  const [isValidCategoryId, setIsValidCategoryId] = useState<boolean>(true);
+  const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] =
+    useState<boolean>(false);
   const [searchTitle, setSearchTitle] = useState<string>("");
-  const activeCategory = useAppSelector((state) => state.activeCategory.activeCategory);
+  const activeCategory = useAppSelector(
+    (state) => state.activeCategory.activeCategory
+  );
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
+  const rawCategories = useAppSelector(
+    (state) => state.rawCategory.rawCategory
+  );
 
   if (error) {
     toast.error("Error while finding your bucketlist.");
   }
 
   useEffect(() => {
+    if (!rawCategories.find((category) => category.id === categoryId)) {
+      setIsValidCategoryId(false);
+    }
+
     if (!activeCategory) {
       const fetchCategoryName = async () => {
         const { data, error } = await fetchActiveCategoryName(
@@ -64,6 +75,10 @@ const CategoryBucketlistHeader = ({
     }
     router.push(`/category/${categoryId}?${params.toString()}`);
   }, [debounceValue]);
+
+  if (isValidCategoryId == false) {
+    return <h1 className="font-poppins text-xl mt-2 ml-8 lg:ml-0 lg:mt-3">404, Category not found !</h1>;
+  }
 
   return (
     <>

@@ -1,5 +1,4 @@
 "use server";
-
 import { comparePassword, hashPassword } from "@/lib/bcrypt";
 import prisma from "@/lib/prisma";
 
@@ -17,6 +16,13 @@ export async function updatePassword({
             where: { id: userId },
             select: { password: true }
         })
+
+        if (userPassword?.password == null) {
+            return {
+                success: false,
+                error: "You have signed up through google, current password does not exist."
+            }
+        }
 
         const currentPasswordMatched = await comparePassword(currentPassword, userPassword?.password!);
 

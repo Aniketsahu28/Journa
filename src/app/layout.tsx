@@ -4,8 +4,6 @@ import "./globals.css";
 import SessionProviderContext from "@/components/Providers/SessionProviderContext";
 import StoreProvider from "@/components/Providers/StoreProvider";
 import NavigationBar from "@/components/SideBar/NavigationBar";
-import { getServerSession } from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]/route";
 
 const dmSerifDisplay = DM_Serif_Display({
   variable: "--font-dm-serif-display",
@@ -36,8 +34,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await getServerSession(authOptions);
-
   return (
     <html lang="en">
       <body
@@ -46,7 +42,7 @@ export default async function RootLayout({
         <SessionProviderContext>
           <StoreProvider>
             <div className="relative flex max-h-screen overflow-hidden">
-              {session && <NavigationBar />}
+              <NavigationBar />
               <main className="flex-1 transition-all duration-300">
                 {children}
               </main>
