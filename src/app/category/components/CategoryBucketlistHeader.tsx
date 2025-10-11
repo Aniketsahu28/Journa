@@ -22,12 +22,9 @@ const CategoryBucketlistHeader = ({
   error?: string;
 }) => {
   const router = useRouter();
-  const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] =
-    useState<boolean>(false);
+  const [openAddBucketItemDialogBox, setOpenAddBucketItemDialogBox] = useState<boolean>(false);
   const [searchTitle, setSearchTitle] = useState<string>("");
-  const activeCategory = useAppSelector(
-    (state) => state.activeCategory.activeCategory
-  );
+  const activeCategory = useAppSelector((state) => state.activeCategory.activeCategory);
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
 
@@ -83,7 +80,7 @@ const CategoryBucketlistHeader = ({
 
       {/* Add BucketItem button */}
       <PrimaryButton
-        className="fixed sm:hidden z-50 px-2 bottom-3 right-3"
+        className="fixed sm:hidden z-10 px-2 bottom-3 right-3"
         onClick={() => setOpenAddBucketItemDialogBox(true)}
       >
         <IconRenderer name="Plus" />

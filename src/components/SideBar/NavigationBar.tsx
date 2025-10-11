@@ -55,7 +55,7 @@ const NavigationBar = () => {
   }, [liveWidth, dispatch]);
 
   return (
-    <div className="fixed lg:relative z-50">
+    <div className="fixed lg:relative z-40">
       {/* NavigationBar */}
       <div
         className="bg-yellow_500 h-screen max-h-screen pt-2 sm:pt-3 p-3 font-poppins flex flex-col gap-6 transition-transform duration-300"

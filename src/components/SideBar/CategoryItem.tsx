@@ -3,10 +3,12 @@ import { useState } from "react";
 import TertiaryButton from "../Buttons/TertiaryButton";
 import IconRenderer from "../IconRenderer/page";
 import { TCategoryItemProps } from "./types/TCategoryItemProps";
-import { useRouter } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/lib/utils/reduxHooks";
+import { usePathname, useRouter } from "next/navigation";
+import { useAppDispatch } from "@/lib/utils/reduxHooks";
 import { setActiveCategory } from "@/lib/features/category/activeCategorySlice";
 import CategoryItemMoreInfoPopover from "./CategoryItemMoreInfoPopover";
+import useDeviceType from "@/hooks/useDeviceType";
+import { setNavigationOpen } from "@/lib/features/navigation/navigationSlice";
 
 const CategoryItem = ({
   category,
@@ -14,13 +16,16 @@ const CategoryItem = ({
   setAddCategoryDefaultParent,
 }: TCategoryItemProps) => {
   const router = useRouter();
-  const activeCategory = useAppSelector(
-    (state) => state.activeCategory.activeCategory
-  );
   const [openSubCategories, setOpenSubCategories] = useState(false);
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
+  const urlPath = pathname.split("/");
+  const deviceType = useDeviceType();
 
   const handleCategoryClick = () => {
+    if (deviceType == "mobile" || deviceType == "tablet") {
+      dispatch(setNavigationOpen());
+    }
     dispatch(
       setActiveCategory({
         categoryId: category.id as number,
@@ -37,7 +42,8 @@ const CategoryItem = ({
         <span
           onClick={handleCategoryClick}
           className={`flex gap-2 items-center justify-between w-full rounded-md group cursor-pointer hover:bg-yellow_400 text-normal p-1 ${
-            activeCategory?.categoryId === category.id && "bg-yellow_300"
+            Number(urlPath[urlPath.length - 1]) === category.id &&
+            "bg-yellow_300"
           }`}
         >
           <span className="flex items-center gap-2">

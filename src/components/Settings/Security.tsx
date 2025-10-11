@@ -70,7 +70,7 @@ const Security = () => {
   return (
     <form onSubmit={handlePasswordUpdate} className="flex flex-col gap-5 py-5">
       <h3 className="text-lg font-nunito font-medium">Update password</h3>
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <PasswordInputBox
           name="currentPassword"
           label="Current Password"
@@ -80,7 +80,7 @@ const Security = () => {
           required
         />
       </span>
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <PasswordInputBox
           name="newPassword"
           label="New Password"
@@ -90,7 +90,7 @@ const Security = () => {
           required
         />
       </span>
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <PasswordInputBox
           name="confirmNewPassword"
           label="Confirm New Password"
@@ -100,7 +100,7 @@ const Security = () => {
           required
         />
       </span>
-      <PrimaryButton type="submit" className="w-52 px-6 mt-4">
+      <PrimaryButton type="submit" className="sm:w-52 px-6 mt-4">
         {loading ? <Loader className="mx-auto" /> : "Save Changes"}
       </PrimaryButton>
     </form>

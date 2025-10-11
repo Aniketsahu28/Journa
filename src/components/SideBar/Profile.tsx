@@ -57,6 +57,7 @@ const Profile = () => {
         isOpen={viewSettingsDialogBox}
         onClose={() => setViewSettingsDialogBox(false)}
         padding={0}
+        closeButtonCSS="mt-2 mr-2 sm:m-0"
       >
         <Settings />
       </DialogBox>

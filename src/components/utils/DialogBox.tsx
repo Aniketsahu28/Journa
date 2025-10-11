@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
 import TertiaryButton from "../Buttons/TertiaryButton";
 import IconRenderer from "../IconRenderer/page";
 import HotToast from "./HotToast";
@@ -9,6 +10,7 @@ type DialogBoxProps = {
   onClose: () => void;
   children: React.ReactNode;
   padding?: number;
+  closeButtonCSS?: string;
 };
 
 export default function DialogBox({
@@ -16,6 +18,7 @@ export default function DialogBox({
   onClose,
   children,
   padding = 4,
+  closeButtonCSS = "",
 }: DialogBoxProps) {
   const [showDialog, setShowDialog] = useState(isOpen);
   const [animate, setAnimate] = useState(false);
@@ -42,7 +45,7 @@ export default function DialogBox({
 
   if (!showDialog) return null;
 
-  return (
+  return ReactDOM.createPortal(
     <>
       <div
         className="fixed w-screen h-screen inset-0 z-50 flex items-center justify-center bg-black/50"
@@ -52,13 +55,13 @@ export default function DialogBox({
         }}
       >
         <div
-          className={`relative bg-white rounded-xl p-3 sm:p-${padding} shadow-lg overflow-hidden ${
+          className={`relative bg-white rounded-xl p-3 sm:p-${padding} shadow-lg ${
             animate ? "animate-fade-in-zoom" : "animate-fade-out-zoom"
           }`}
           onClick={(e) => e.stopPropagation()}
         >
           <TertiaryButton
-            className="absolute right-3 top-3 text-black/70 p-1 border border-transparent hover:border-black/25"
+            className={`absolute right-3 top-3 text-black/70 p-1 border border-transparent hover:border-black/25 ${closeButtonCSS}`}
             onClick={onClose}
           >
             <IconRenderer name="Plus" className="rotate-45" />
@@ -67,6 +70,7 @@ export default function DialogBox({
         </div>
       </div>
       <HotToast />
-    </>
+    </>,
+    document.body
   );
 }

@@ -85,7 +85,7 @@ const Profile = () => {
         Remove Photo
         </TertiaryButton>
         </span> */}
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <InputBox
           name="Name"
           label="Name"
@@ -95,7 +95,7 @@ const Profile = () => {
           error={error.name}
         />
       </span>
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <InputBox
           name="email"
           label="Email"
@@ -105,7 +105,7 @@ const Profile = () => {
           error={error.dateOfBirth}
         />
       </span>
-      <span className="w-[50%]">
+      <span className="sm:w-[50%]">
         <DatePickerBox
           name="dateOfBirth"
           label="Date of Birth"
@@ -114,7 +114,7 @@ const Profile = () => {
           onChange={(date) => setDateOfBirth(date!)}
         />
       </span>
-      <PrimaryButton type="submit" className="w-52 px-6 mt-4">
+      <PrimaryButton type="submit" className="sm:w-52 px-6 mt-4">
         {loading ? <Loader className="mx-auto" /> : "Save Changes"}
       </PrimaryButton>
     </form>
